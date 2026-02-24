@@ -1,22 +1,18 @@
 <!DOCTYPE html>
-<html lang="it" class="scroll-smooth">
+<html lang="it" class="scroll-smooth overflow-x-hidden">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Matteo Maria Macauda | Videomaker & Content Marketing</title>
     
-    <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- Tailwind Config & Custom CSS -->
     <script>
         tailwind.config = {
             theme: {
@@ -39,10 +35,12 @@
     </script>
 
     <style>
-        body {
+        html, body {
             background-color: #000000;
             color: #ffffff;
             overflow-x: hidden;
+            width: 100%;
+            position: relative;
         }
 
         /* Glassmorphism Utilities */
@@ -59,7 +57,6 @@
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
-            /* Fix per evitare scomparse al hover */
             backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
             transform-style: preserve-3d;
@@ -79,17 +76,23 @@
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
-        /* Ambient Glow */
+        /* Ambient Glow - FIX VISIBILITÀ */
         .ambient-glow {
             position: absolute;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(255,122,0,0.15) 0%, rgba(0,0,0,0) 70%);
-            top: -200px;
+            width: 1000px;
+            height: 1000px;
+            background: radial-gradient(circle, rgba(255,122,0,0.3) 0%, rgba(0,0,0,0) 70%);
+            top: -500px;
             left: 50%;
             transform: translateX(-50%);
-            z-index: -1;
+            z-index: 0; /* Cambiato da -1 a 0 così non finisce dietro il nero del body */
             pointer-events: none;
+        }
+
+        /* Assicuriamo che il contenuto principale stia sopra la luce */
+        main, footer {
+            position: relative;
+            z-index: 10;
         }
 
         /* Animations */
@@ -123,7 +126,7 @@
             background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0) 100%);
             opacity: 0;
             transition: opacity 0.3s ease;
-            pointer-events: none; /* Evita interferenze con l'hover della card */
+            pointer-events: none;
         }
         .glass-card:hover .work-overlay {
             opacity: 1;
@@ -144,14 +147,21 @@
         .scroll-arrow-anim {
             animation: scroll-arrow-float 2.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
         }
+
+        /* Carousel Scroll Hidden */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-accent selection:text-white">
 
-    <!-- Ambient Background Glow -->
     <div class="ambient-glow"></div>
 
-    <!-- Header -->
     <header class="fixed top-0 w-full z-[100] glass-nav transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between relative z-[110]">
             <a href="#" onclick="navigate('home'); return false;" class="flex items-center hover:opacity-80 transition-opacity">
@@ -197,12 +207,10 @@
         </div>
     </header>
 
-    <!-- VISTA HOME -->
     <main id="view-home" class="view-section active">
-        <!-- Hero Section -->
         <section class="relative min-h-screen flex flex-col justify-center items-center px-6 pt-20 text-center overflow-hidden">
             <div class="max-w-5xl mx-auto z-10 mb-20">
-                <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-6 reveal leading-tight">
+                <h1 class="text-4xl md:text-7xl font-bold tracking-tight mb-6 reveal leading-tight">
                     Videomaking e Content Marketing<br/>
                     <span class="text-accent">per Aziende e Creator.</span>
                 </h1>
@@ -216,7 +224,7 @@
                     </button>
                 </div>
             </div>
-            <!-- Explore Scroll Indicator -->
+            
             <div class="absolute bottom-10 left-0 right-0 flex flex-col items-center pointer-events-none">
                 <div class="flex flex-col items-center gap-2 reveal">
                     <span class="text-[10px] uppercase tracking-[0.3em] text-graytext font-semibold mb-1">Esplora</span>
@@ -225,42 +233,71 @@
             </div>
         </section>
 
-        <!-- Social Proof -->
-        <section class="py-24 border-y border-white/5 bg-white/[0.01]" id="trust">
-            <div class="max-w-7xl mx-auto px-6">
+        <section class="py-24 border-y border-white/5 bg-white/[0.01] relative" id="trust">
+            <div class="max-w-7xl mx-auto px-6 relative">
                 <p class="text-center text-lg md:text-xl font-bold text-white uppercase tracking-widest mb-16 reveal">
                     Brand, aziende e creator che hanno <span class="text-accent">scelto me</span>
                 </p>
-                <div class="flex flex-wrap justify-center gap-6 reveal">
-                    <a href="https://listhen.it/" target="_blank" class="glass-card flex items-center justify-center p-2 w-32 h-32 md:w-36 md:h-36 rounded-xl overflow-hidden shadow-sm">
-                        <img src="https://i.ibb.co/Fq6Zjkcs/5fc678930737a300019b2dc9-198x149-1x.jpg" alt="Listhen Logo" class="w-full h-full object-cover rounded-lg">
-                    </a>
-                    <a href="https://www.instagram.com/gl_personalcoaching" target="_blank" class="glass-card flex items-center justify-center p-2 w-32 h-32 md:w-36 md:h-36 rounded-xl overflow-hidden shadow-sm">
-                        <img src="https://i.ibb.co/FLPmYXfb/489281375-1028214965952045-1239755772869026008-n.jpg" alt="GL Personal Coaching Logo" class="w-full h-full object-cover rounded-lg">
-                    </a>
-                    <a href="https://www.instagram.com/myfield_ferrara" target="_blank" class="glass-card flex items-center justify-center p-2 w-32 h-32 md:w-36 md:h-36 rounded-xl overflow-hidden shadow-sm">
-                        <img src="https://i.ibb.co/R4Tqp4sY/557341010-18318057052245966-1725807342095357201-n.jpg" alt="MyField Ferrara Logo" class="w-full h-full object-cover rounded-lg">
-                    </a>
-                    <a href="https://www.youtube.com/@matteomarzolla" target="_blank" class="glass-card flex items-center justify-center p-2 w-32 h-32 md:w-36 md:h-36 rounded-xl overflow-hidden shadow-sm">
-                        <img src="https://i.ibb.co/N6DpQ6Nd/382536263-1008036383653544-2987748808624428400-n.jpg" alt="Matteo Marzolla Logo" class="w-full h-full object-cover rounded-lg">
-                    </a>
-                    <a href="https://www.youtube.com/@microfonodelcestista" target="_blank" class="glass-card flex items-center justify-center p-2 w-32 h-32 md:w-36 md:h-36 rounded-xl overflow-hidden shadow-sm">
-                        <img src="https://i.ibb.co/S4YwfpPJ/551969315-18061557443526725-7935004091035072684-n.jpg" alt="Microfono del Cestista Logo" class="w-full h-full object-cover rounded-lg">
-                    </a>
-                    <a href="https://www.instagram.com/allylabkids" target="_blank" class="glass-card flex items-center justify-center p-2 w-32 h-32 md:w-36 md:h-36 rounded-xl overflow-hidden shadow-sm">
-                        <img src="https://i.ibb.co/C59rk2dY/626271930-18557913100017226-2595093498704943689-n.jpg" alt="Ally Lab Kids Logo" class="w-full h-full object-cover rounded-lg">
-                    </a>
+                
+                <div class="relative group reveal mb-20">
+                    <div class="absolute -left-2 top-1/2 -translate-y-1/2 z-10 md:hidden">
+                        <button onclick="scrollCarousel('trust-carousel', -1)" class="w-10 h-10 bg-black/50 border border-white/10 rounded-full flex items-center justify-center text-white backdrop-blur-md active:scale-95">
+                            <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                    <div class="absolute -right-2 top-1/2 -translate-y-1/2 z-10 md:hidden">
+                        <button onclick="scrollCarousel('trust-carousel', 1)" class="w-10 h-10 bg-black/50 border border-white/10 rounded-full flex items-center justify-center text-white backdrop-blur-md active:scale-95">
+                            <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+
+                    <div id="trust-carousel" class="flex md:flex-wrap justify-start md:justify-center items-center gap-6 overflow-x-auto md:overflow-visible no-scrollbar snap-x snap-mandatory">
+                        <div class="snap-center shrink-0 w-[calc((100vw-48px-24px)/3)] md:w-36 aspect-square">
+                            <a href="https://listhen.it/" target="_blank" class="glass-card flex items-center justify-center p-2 w-full h-full rounded-xl overflow-hidden shadow-sm">
+                                <img src="https://i.ibb.co/Fq6Zjkcs/5fc678930737a300019b2dc9-198x149-1x.jpg" alt="Listhen Logo" class="w-full h-full object-cover rounded-lg">
+                            </a>
+                        </div>
+                        <div class="snap-center shrink-0 w-[calc((100vw-48px-24px)/3)] md:w-36 aspect-square">
+                            <a href="https://www.instagram.com/gl_personalcoaching" target="_blank" class="glass-card flex items-center justify-center p-2 w-full h-full rounded-xl overflow-hidden shadow-sm">
+                                <img src="https://i.ibb.co/FLPmYXfb/489281375-1028214965952045-1239755772869026008-n.jpg" alt="GL Personal Coaching Logo" class="w-full h-full object-cover rounded-lg">
+                            </a>
+                        </div>
+                        <div class="snap-center shrink-0 w-[calc((100vw-48px-24px)/3)] md:w-36 aspect-square">
+                            <a href="https://www.instagram.com/myfield_ferrara" target="_blank" class="glass-card flex items-center justify-center p-2 w-full h-full rounded-xl overflow-hidden shadow-sm">
+                                <img src="https://i.ibb.co/R4Tqp4sY/557341010-18318057052245966-1725807342095357201-n.jpg" alt="MyField Ferrara Logo" class="w-full h-full object-cover rounded-lg">
+                            </a>
+                        </div>
+                        <div class="snap-center shrink-0 w-[calc((100vw-48px-24px)/3)] md:w-36 aspect-square">
+                            <a href="https://www.youtube.com/@matteomarzolla" target="_blank" class="glass-card flex items-center justify-center p-2 w-full h-full rounded-xl overflow-hidden shadow-sm">
+                                <img src="https://i.ibb.co/N6DpQ6Nd/382536263-1008036383653544-2987748808624428400-n.jpg" alt="Matteo Marzolla Logo" class="w-full h-full object-cover rounded-lg">
+                            </a>
+                        </div>
+                        <div class="snap-center shrink-0 w-[calc((100vw-48px-24px)/3)] md:w-36 aspect-square">
+                            <a href="https://www.youtube.com/@microfonodelcestista" target="_blank" class="glass-card flex items-center justify-center p-2 w-full h-full rounded-xl overflow-hidden shadow-sm">
+                                <img src="https://i.ibb.co/S4YwfpPJ/551969315-18061557443526725-7935004091035072684-n.jpg" alt="Microfono del Cestista Logo" class="w-full h-full object-cover rounded-lg">
+                            </a>
+                        </div>
+                        <div class="snap-center shrink-0 w-[calc((100vw-48px-24px)/3)] md:w-36 aspect-square">
+                            <a href="https://www.instagram.com/allylabkids" target="_blank" class="glass-card flex items-center justify-center p-2 w-full h-full rounded-xl overflow-hidden shadow-sm">
+                                <img src="https://i.ibb.co/C59rk2dY/626271930-18557913100017226-2595093498704943689-n.jpg" alt="Ally Lab Kids Logo" class="w-full h-full object-cover rounded-lg">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col items-center gap-2 reveal pointer-events-none">
+                    <span class="text-[10px] uppercase tracking-[0.3em] text-graytext font-semibold mb-1">Esplora</span>
+                    <i data-lucide="chevron-down" class="w-6 h-6 text-accent scroll-arrow-anim"></i>
                 </div>
             </div>
         </section>
 
-        <!-- Chi Sono -->
         <section class="py-32 px-6 relative" id="metodo">
             <div class="max-w-4xl mx-auto">
                 <h2 class="text-3xl md:text-5xl font-bold mb-12 text-center reveal">
                     Dalla <span class="text-accent">Pratica</span> alla <span class="text-accent">Strategia</span>
                 </h2>
-                <div class="glass-card p-8 md:p-12 rounded-3xl reveal">
+                <div class="glass-card p-8 md:p-12 rounded-3xl reveal mb-20">
                     <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-6 font-light">
                         Ciao, sono Teo, videomaker specializzato in content marketing. Ho imparato questo mestiere nell'unico modo che conta davvero: facendolo. Ore passate a studiare format, dinamiche social e tecniche di montaggio per capire esattamente come si trasforma l'attenzione di un utente in un'azione concreta.
                     </p>
@@ -268,18 +305,21 @@
                         Il mio lavoro è tradurre questa pratica in risultati per il tuo business. Che tu voglia posizionare il tuo brand, vendere un prodotto o far crescere la tua community, sviluppo i video e la strategia per farti raggiungere l'obiettivo.
                     </p>
                 </div>
+
+                <div class="flex flex-col items-center gap-2 reveal pointer-events-none">
+                    <span class="text-[10px] uppercase tracking-[0.3em] text-graytext font-semibold mb-1">Esplora</span>
+                    <i data-lucide="chevron-down" class="w-6 h-6 text-accent scroll-arrow-anim"></i>
+                </div>
             </div>
         </section>
 
-        <!-- Servizi -->
         <section class="py-32 px-6 bg-white/[0.01]" id="servizi">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center mb-20 reveal">
                     <h2 class="text-3xl md:text-5xl font-bold mb-4">I <span class="text-accent">Miei</span> Servizi</h2>
-                    <p class="text-graytext text-lg max-w-2xl mx-auto">Ecosistemi visivi completi per dominare l'attenzione online.</p>
+                    <p class="text-graytext text-lg max-w-2xl mx-auto font-light">Ecosistemi visivi completi per dominare l'attenzione online.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Videomaking -->
                     <div class="glass-card p-8 rounded-3xl reveal">
                         <div class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center mb-8 border border-white/10 text-accent">
                             <i data-lucide="video" class="w-7 h-7"></i>
@@ -287,7 +327,6 @@
                         <h3 class="text-2xl font-bold mb-4 text-white">Videomaking</h3>
                         <p class="text-graytext leading-relaxed font-light">Dal set alla ripresa. Riprese cinematografiche e dinamiche, strutturate nativamente per performare.</p>
                     </div>
-                    <!-- Video Editing -->
                     <div class="glass-card p-8 rounded-3xl reveal">
                         <div class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center mb-8 border border-white/10 text-accent">
                             <i data-lucide="scissors" class="w-7 h-7"></i>
@@ -295,7 +334,6 @@
                         <h3 class="text-2xl font-bold mb-4 text-white">Video Editing</h3>
                         <p class="text-graytext leading-relaxed font-light">Il montaggio è dove nasce la magia. Ritmo incalzante e sound design immersivo.</p>
                     </div>
-                    <!-- Strategia e Scripting -->
                     <div class="glass-card p-8 rounded-3xl reveal">
                         <div class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center mb-8 border border-white/10 text-accent">
                             <i data-lucide="lightbulb" class="w-7 h-7"></i>
@@ -308,25 +346,21 @@
         </section>
     </main>
 
-    <!-- VISTA LAVORI (Portfolio) -->
-    <main id="view-lavori" class="view-section pt-32 pb-24 px-6 min-h-screen">
+    <main id="view-lavori" class="view-section pt-32 pb-24 px-6 min-h-screen overflow-x-hidden">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16 reveal">
                 <h2 class="text-4xl md:text-6xl font-bold mb-6 italic tracking-tight">Portfolio <span class="text-accent">Selezionato.</span></h2>
                 <p class="text-graytext text-lg max-w-2xl mx-auto font-light">Gli esempi sono solo alcuni dei lavori che ho prodotto per i miei clienti e non solo!</p>
             </div>
 
-            <!-- Filtri -->
             <div class="flex flex-wrap justify-center gap-3 mb-16 reveal">
                 <button onclick="filterPortfolio('social-marketing', this)" class="filter-btn px-6 py-2 rounded-full border border-white/10 text-sm font-medium transition-all hover:border-accent/50">Social Marketing</button>
                 <button onclick="filterPortfolio('cinematic', this)" class="filter-btn px-6 py-2 rounded-full border border-white/10 text-sm font-medium transition-all hover:border-accent/50">Cinematic</button>
                 <button onclick="filterPortfolio('personal-projects', this)" class="filter-btn px-6 py-2 rounded-full border border-white/10 text-sm font-medium transition-all hover:border-accent/50">Personal Projects</button>
             </div>
 
-            <!-- Grid Lavori - Sostituito columns con grid per stabilità -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 reveal" id="portfolio-grid">
                 
-                <!-- MyField Strength & Conditioning (Social Marketing) -->
                 <div class="work-item group social-marketing relative aspect-[9/16] rounded-3xl overflow-hidden glass-card cursor-pointer" 
                      onclick="openVideoModal('https://www.instagram.com/reel/DPL010oDCoY/embed', 'MyField Ferrara - Strength & Conditioning', true)">
                     <img src="https://i.ibb.co/gMJTLSTY/591165588-852379984205909-5376029182675258672-n.jpg" alt="Copertina" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
@@ -339,7 +373,6 @@
                     </div>
                 </div>
 
-                <!-- Ally - Video 1 (Social Marketing) -->
                 <div class="work-item group social-marketing relative aspect-[9/16] rounded-3xl overflow-hidden glass-card cursor-pointer" 
                      onclick="openVideoModal('https://www.instagram.com/reel/DUJA_MsCFVd/embed', 'Ally - Video 1', true)">
                     <img src="https://i.ibb.co/RpbKqDRX/Gram-Fetchr-Thumbnail-72780119.jpg" 
@@ -354,7 +387,6 @@
                     </div>
                 </div>
 
-                <!-- Reel Instagram 2026 (Personal Projects) -->
                 <div class="work-item group personal-projects relative aspect-video rounded-3xl overflow-hidden glass-card cursor-pointer" 
                      onclick="openVideoModal('https://www.youtube.com/embed/ZYBKlJY46wA', 'Reel Instagram 2026', false)">
                     <img src="https://i.ibb.co/cSKN7y5Z/ZYBKl-JY46w-A-HD.jpg" 
@@ -369,7 +401,6 @@
                     </div>
                 </div>
 
-                <!-- MyField Content Strategy (Social Marketing) -->
                 <div class="work-item group social-marketing relative aspect-[9/16] rounded-3xl overflow-hidden glass-card cursor-pointer" 
                      onclick="openVideoModal('https://www.instagram.com/reel/DO0w_-nDDWM/embed', 'MyField Ferrara - Content Strategy', true)">
                     <img src="https://i.ibb.co/5hpvJ8fF/550829170-1870878360453409-8070565456234247393-n.jpg" alt="Copertina" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
@@ -382,19 +413,6 @@
                     </div>
                 </div>
 
-                <!-- Matteo Marzolla (Social Marketing) -->
-                <div class="work-item group social-marketing relative aspect-video rounded-3xl overflow-hidden glass-card cursor-pointer" 
-                     onclick="openVideoModal('https://www.youtube.com/embed/dQw4w9WgXcQ', 'Matteo Marzolla - Growth Strategy', false)">
-                    <div class="w-full h-full bg-white/5 flex items-center justify-center">
-                        <i data-lucide="youtube" class="w-16 h-16 text-red-600/40 group-hover:text-red-600 transition-colors duration-500"></i>
-                    </div>
-                    <div class="work-overlay absolute inset-0 p-6 flex flex-col justify-end">
-                        <span class="text-accent text-xs font-bold uppercase tracking-widest mb-2">Social Marketing</span>
-                        <h4 class="text-xl font-bold text-white">YouTube Content Strategy</h4>
-                    </div>
-                </div>
-
-                <!-- Cinematic - Yamaha R7 (Cinematic) -->
                 <div class="work-item group cinematic relative aspect-[9/16] rounded-3xl overflow-hidden glass-card cursor-pointer"
                      onclick="openVideoModal('https://www.instagram.com/reel/DTao5EADGay/embed', 'Cinematic - Yamaha R7', true)">
                     <img src="https://i.ibb.co/cXLdL7bn/614910429-18423940864114638-862154632572587510-n.jpg" 
@@ -409,7 +427,6 @@
                     </div>
                 </div>
 
-                <!-- Cinematic - Yamaha R7 2 (Cinematic) -->
                 <div class="work-item group cinematic relative aspect-[9/16] rounded-3xl overflow-hidden glass-card cursor-pointer"
                      onclick="openVideoModal('https://www.instagram.com/reel/DNNndH_sLEB/embed', 'Cinematic - Yamaha R7 2', true)">
                     <img src="https://i.ibb.co/gYkPb24/531233189-18400638547114638-6357552322738496405-n.jpg" 
@@ -424,6 +441,20 @@
                     </div>
                 </div>
 
+                <div class="work-item group cinematic relative aspect-video rounded-3xl overflow-hidden glass-card cursor-pointer"
+                     onclick="openVideoModal('https://www.youtube.com/embed/DWQPP8C6h9E', 'ETNA - Cinematic Vlog', false)">
+                    <img src="https://i.ibb.co/391h0ZSZ/DWQPP8-C6h9-E-HD.jpg" 
+                         alt="ETNA Cinematic Vlog Cover" 
+                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 flex items-center justify-center z-10">
+                        <i data-lucide="play-circle" class="w-16 h-16 text-white/80 group-hover:text-accent group-hover:scale-110 transition-all duration-500 drop-shadow-2xl"></i>
+                    </div>
+                    <div class="work-overlay absolute inset-0 p-6 flex flex-col justify-end z-20">
+                        <span class="text-accent text-xs font-bold uppercase tracking-widest mb-2">Cinematic</span>
+                        <h4 class="text-xl font-bold text-white">ETNA - Cinematic Vlog</h4>
+                    </div>
+                </div>
+
             </div>
 
             <div class="mt-20 text-center reveal">
@@ -434,12 +465,10 @@
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="py-12 text-center border-t border-white/5">
+    <footer class="py-12 text-center border-t border-white/5 relative z-10">
         <p class="text-graytext text-sm">&copy; <script>document.write(new Date().getFullYear())</script> Matteo Maria Macauda. P.IVA 02153520891.</p>
     </footer>
 
-    <!-- Video Modal -->
     <div id="videoModal" class="fixed inset-0 z-[150] flex items-center justify-center px-4 md:px-20 opacity-0 pointer-events-none transition-opacity duration-300">
         <div class="absolute inset-0 bg-black/95 backdrop-blur-xl" onclick="closeVideoModal()"></div>
         <div class="relative glass-modal rounded-3xl overflow-hidden transform scale-95 transition-all duration-500 flex flex-col" id="videoModalContent">
@@ -453,12 +482,10 @@
         </div>
     </div>
 
-    <!-- Floating Button -->
     <button onclick="toggleContactModal()" class="fixed bottom-8 right-8 z-[130] bg-accent text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg btn-floating transition-transform hover:scale-110">
         <i data-lucide="message-square" class="w-7 h-7"></i>
     </button>
 
-    <!-- Modal Contatti -->
     <div id="contactModal" class="fixed inset-0 z-[140] flex items-center justify-center px-4 opacity-0 pointer-events-none transition-opacity duration-300">
         <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="toggleContactModal()"></div>
         <div class="glass-modal w-full max-w-md p-8 rounded-3xl relative transform translate-y-10 transition-transform duration-500 shadow-2xl" id="contactModalContent">
@@ -481,9 +508,17 @@
         </div>
     </div>
 
-    <!-- Scripts -->
     <script>
         lucide.createIcons();
+
+        function scrollCarousel(id, direction) {
+            const carousel = document.getElementById(id);
+            const scrollAmount = carousel.offsetWidth;
+            carousel.scrollBy({
+                left: direction * scrollAmount,
+                behavior: 'smooth'
+            });
+        }
 
         function navigate(viewId) {
             document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
@@ -491,12 +526,9 @@
             if(target) {
                 target.classList.add('active');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
-                
-                // Se si naviga verso i lavori, attiva automaticamente il filtro social-marketing
                 if(viewId === 'lavori') {
                     filterPortfolio('social-marketing');
                 }
-                
                 setTimeout(initScrollAnimations, 100);
             }
         }
@@ -504,11 +536,7 @@
         function filterPortfolio(category, element) {
             const items = document.querySelectorAll('.work-item');
             const buttons = document.querySelectorAll('.filter-btn');
-            
             buttons.forEach(btn => btn.classList.remove('active'));
-            
-            // Se l'elemento è passato (clic manuale), lo attiva. 
-            // Altrimenti cerca il pulsante corrispondente alla categoria (navigazione automatica).
             if (element) {
                 element.classList.add('active');
             } else {
@@ -518,7 +546,6 @@
                     }
                 });
             }
-
             items.forEach(item => {
                 if (item.classList.contains(category)) {
                     item.style.display = 'block';
@@ -535,10 +562,8 @@
             const content = document.getElementById('videoModalContent');
             const container = document.getElementById('videoContainer');
             const titleEl = document.getElementById('videoTitle');
-
             titleEl.innerText = title;
             container.innerHTML = `<iframe src="${url}" class="w-full h-full" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
-            
             if (isVertical) {
                 content.classList.remove('max-w-5xl', 'aspect-video');
                 content.classList.add('max-w-[380px]', 'w-full', 'aspect-[9/16]');
@@ -546,7 +571,6 @@
                 content.classList.remove('max-w-[380px]', 'aspect-[9/16]');
                 content.classList.add('max-w-5xl', 'w-full', 'aspect-video');
             }
-
             modal.classList.remove('opacity-0', 'pointer-events-none');
             content.classList.remove('scale-95');
             content.classList.add('scale-100');
@@ -557,7 +581,6 @@
             const modal = document.getElementById('videoModal');
             const content = document.getElementById('videoModalContent');
             const container = document.getElementById('videoContainer');
-
             modal.classList.add('opacity-0', 'pointer-events-none');
             content.classList.remove('scale-100');
             content.classList.add('scale-95');
@@ -571,7 +594,6 @@
             const iconMenu = document.getElementById('icon-menu');
             const iconX = document.getElementById('icon-x');
             const isOpen = menu.classList.contains('opacity-100');
-
             if (!isOpen) {
                 menu.classList.remove('opacity-0', 'pointer-events-none');
                 menu.classList.add('opacity-100', 'pointer-events-auto');
@@ -622,7 +644,6 @@
             const modal = document.getElementById('contactModal');
             const content = document.getElementById('contactModalContent');
             const isOpen = modal.classList.contains('opacity-100');
-
             if(!isOpen) {
                 modal.classList.remove('opacity-0', 'pointer-events-none');
                 modal.classList.add('opacity-100', 'pointer-events-auto');
