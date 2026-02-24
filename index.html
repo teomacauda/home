@@ -12,7 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <script>
@@ -45,7 +44,6 @@
             position: relative;
         }
 
-        /* Glassmorphism Utilities */
         .glass-nav {
             background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(20px);
@@ -78,7 +76,6 @@
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
-        /* Ambient Glow - FIX VISIBILITÀ */
         .ambient-glow {
             position: absolute;
             width: 1000px;
@@ -87,17 +84,15 @@
             top: -500px;
             left: 50%;
             transform: translateX(-50%);
-            z-index: 0; /* Cambiato da -1 a 0 così non finisce dietro il nero del body */
+            z-index: 0;
             pointer-events: none;
         }
 
-        /* Assicuriamo che il contenuto principale stia sopra la luce */
         main, footer {
             position: relative;
             z-index: 10;
         }
 
-        /* Animations */
         .reveal {
             opacity: 0;
             transform: translateY(40px);
@@ -109,7 +104,6 @@
             transform: translateY(0);
         }
 
-        /* SPA Views */
         .view-section {
             display: none;
             animation: fadeIn 0.5s ease forwards;
@@ -123,7 +117,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Video Card Custom Styles */
         .work-overlay {
             background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0) 100%);
             opacity: 0;
@@ -140,7 +133,6 @@
             border-color: #FF7A00;
         }
 
-        /* Explore Arrow Animation */
         @keyframes scroll-arrow-float {
             0% { transform: translateY(0); opacity: 0.4; }
             50% { transform: translateY(10px); opacity: 1; }
@@ -150,7 +142,6 @@
             animation: scroll-arrow-float 2.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
         }
 
-        /* Carousel Scroll Hidden */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -174,10 +165,10 @@
             </a>
             
             <nav class="hidden md:flex gap-4 text-sm font-medium text-graytext">
-                <button onclick="navigate('lavori')" class="px-5 py-2.5 rounded-full border border-white/5 hover:border-accent/30 hover:bg-accent/10 hover:text-white transition-all duration-300 cursor-pointer">
+                <button onclick="navigate('lavori')" class="px-5 py-2.5 rounded-full border border-accent hover:border-accent/30 hover:bg-accent/10 hover:text-white transition-all duration-300 cursor-pointer">
                     Lavori
                 </button>
-                <button onclick="navigate('home'); setTimeout(() => document.getElementById('servizi').scrollIntoView({behavior: 'smooth'}), 100)" class="px-5 py-2.5 rounded-full border border-white/5 hover:border-accent/30 hover:bg-accent/10 hover:text-white transition-all duration-300 cursor-pointer">
+                <button onclick="navigate('home'); setTimeout(() => document.getElementById('servizi').scrollIntoView({behavior: 'smooth'}), 100)" class="px-5 py-2.5 rounded-full border border-accent hover:border-accent/30 hover:bg-accent/10 hover:text-white transition-all duration-300 cursor-pointer">
                     Servizi
                 </button>
             </nav>
