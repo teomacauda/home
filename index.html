@@ -179,8 +179,8 @@
             </button>
         </div>
 
-        <div id="mobileMenu" class="fixed inset-0 z-[90] flex items-start justify-center px-6 pt-24 opacity-0 pointer-events-none transition-all duration-300">
-            <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="toggleMobileMenu()"></div>
+        <div id="mobileMenu" class="fixed inset-0 z-[110] flex items-start justify-center px-6 pt-24 opacity-0 pointer-events-none transition-all duration-300">
+            <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="toggleMobileMenu()"></div>
             <div id="mobileMenuContent" class="glass-modal w-full max-w-sm p-8 rounded-3xl relative transform -translate-y-10 transition-transform duration-500 shadow-2xl">
                 <nav class="flex flex-col gap-8 text-left">
                     <button onclick="navigateMobile('home')" class="flex items-center gap-4 text-2xl font-bold text-white hover:text-accent transition-colors group">
@@ -461,6 +461,12 @@
     <footer class="py-12 text-center border-t border-white/5 relative z-10">
         <p class="text-graytext text-sm">&copy; <script>document.write(new Date().getFullYear())</script> Matteo Maria Macauda. P.IVA 02153520891.</p>
     </footer>
+
+    <div class="pb-12 text-center px-6 relative z-10">
+        <p class="text-[10px] text-white/30 max-w-2xl mx-auto leading-relaxed">
+            Ogni contenuto visivo, testuale e il codice sorgente di questo sito sono di proprietà esclusiva dell'autore. È vietata la riproduzione, anche parziale, senza autorizzazione scritta.
+        </p>
+    </div>
 
     <div id="videoModal" class="fixed inset-0 z-[150] flex items-center justify-center px-4 md:px-20 opacity-0 pointer-events-none transition-opacity duration-300">
         <div class="absolute inset-0 bg-black/95 backdrop-blur-xl" onclick="closeVideoModal()"></div>
