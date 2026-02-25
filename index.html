@@ -41,7 +41,6 @@
         main, footer { position: relative; z-index: 10; }
         .reveal { opacity: 0; transform: translateY(50px); will-change: transform, opacity; }
         
-        /* Modifica specifica per caricamento immediato su Desktop */
         @media (min-width: 768px) {
             .reveal.desktop-immediate {
                 opacity: 0.6 !important;
@@ -103,7 +102,7 @@
     </header>
 
     <main>
-        <section id="hero-section" class="relative min-h-[85vh] md:min-h-screen flex flex-col justify-center items-center px-6 pt-24 pb-12 md:pb-20 text-center overflow-hidden">
+        <section id="hero-section" class="relative min-h-[85vh] md:min-h-screen flex flex-col justify-center items-center px-6 pt-40 md:pt-24 pb-32 md:pb-20 text-center overflow-hidden">
             <div class="camera-bg-container" id="camera-container">
                 <svg viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="cam-body"><rect x="200" y="220" width="400" height="230" rx="12" stroke="white" stroke-width="3" stroke-opacity="0.5"/><line x1="200" y1="280" x2="600" y2="280" stroke="white" stroke-width="2" stroke-opacity="0.2"/></g>
@@ -117,10 +116,10 @@
             </div>
             
             <div class="max-w-5xl mx-auto z-10 flex flex-col items-center">
-                <h1 class="text-3xl md:text-7xl font-bold tracking-tight mb-6 md:mb-8 reveal leading-tight drop-shadow-lg">Videomaking e Content Marketing<br/><span class="text-accent">per Aziende e Creator.</span></h1>
-                <p class="text-base md:text-xl text-graytext mb-10 md:mb-12 max-w-3xl mx-auto reveal font-light leading-relaxed drop-shadow-md px-4">Affianco brand e creator nella loro comunicazione online. Non mi limito a girare e montare: studio la strategia visiva più adatta per farti raggiungere il tuo pubblico, aumentare la tua visibilità e valorizzare concretamente ciò che offri.</p>
+                <h1 class="text-3xl md:text-7xl font-bold tracking-tight mb-8 md:mb-8 reveal leading-tight drop-shadow-lg">Videomaking e Content Marketing<br/><span class="text-accent">per Aziende e Creator.</span></h1>
+                <p class="text-base md:text-xl text-graytext mb-12 md:mb-12 max-w-3xl mx-auto reveal font-light leading-relaxed drop-shadow-md px-4">Affianco brand e creator nella loro comunicazione online. Non mi limito a girare e montare: studio la strategia visiva più adatta per farti raggiungere il tuo pubblico, aumentare la tua visibilità e valorizzare concretamente ciò che offri.</p>
                 
-                <div class="reveal mb-12 md:mb-16">
+                <div class="reveal mb-20 md:mb-16">
                     <a href="lavori.html" class="inline-flex items-center gap-2 bg-accent hover:bg-accentHover text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105">Guarda i miei lavori <i data-lucide="arrow-right" class="w-5 h-5"></i></a>
                 </div>
 
