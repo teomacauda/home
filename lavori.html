@@ -365,6 +365,15 @@
             initScrollAnimations();
             filterPortfolio('social-marketing'); // Avvia filtrando la prima categoria
 
+            // FIX MOBILE: Forza la comparsa immediata dei primi elementi su mobile
+            if (window.innerWidth <= 768) {
+                const reveals = document.querySelectorAll('.reveal');
+                reveals.forEach((el, index) => {
+                    // Attiviamo subito Titolo, Filtri e Griglia Video
+                    if (index < 3) el.classList.add('active');
+                });
+            }
+
             const pill = document.getElementById('chat-pill');
             if(pill) {
                 setTimeout(() => { pill.classList.add('expanded'); }, 3000);
