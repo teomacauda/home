@@ -41,11 +41,10 @@
         main, footer { position: relative; z-index: 10; }
         .reveal { opacity: 0; transform: translateY(50px); will-change: transform, opacity; }
         
-        @media (min-width: 768px) {
-            .reveal.desktop-immediate {
-                opacity: 0.6 !important;
-                transform: translateY(0) !important;
-            }
+        /* Forza apparizione immediata senza scroll (usata per Hero Esplora) */
+        .reveal.immediate-show {
+            opacity: 0.6 !important;
+            transform: translateY(0) !important;
         }
 
         @keyframes scroll-arrow-down { 0% { transform: translateY(-10px); opacity: 0; } 50% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(10px); opacity: 0; } }
@@ -123,7 +122,7 @@
                     <a href="lavori.html" class="inline-flex items-center gap-2 bg-accent hover:bg-accentHover text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105">Guarda i miei lavori <i data-lucide="arrow-right" class="w-5 h-5"></i></a>
                 </div>
 
-                <div class="flex flex-col items-center gap-3 reveal desktop-immediate opacity-60 w-full md:absolute md:bottom-12 md:inset-x-0 md:flex md:flex-col md:items-center">
+                <div class="flex flex-col items-center gap-3 reveal immediate-show opacity-60 w-full md:absolute md:bottom-12 md:inset-x-0 md:flex md:flex-col md:items-center">
                     <span class="text-[10px] uppercase tracking-[0.3em] text-graytext font-semibold drop-shadow-md">Esplora</span>
                     <i data-lucide="chevron-down" class="w-6 h-6 text-accent scroll-arrow-anim drop-shadow-md"></i>
                 </div>
