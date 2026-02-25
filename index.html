@@ -13,6 +13,9 @@
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <script>
         tailwind.config = {
@@ -26,9 +29,6 @@
                         accent: '#FF7A00',
                         accentHover: '#E56D00',
                         graytext: '#AAAAAA',
-                    },
-                    backgroundImage: {
-                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
                     }
                 }
             }
@@ -88,6 +88,24 @@
             pointer-events: none;
         }
 
+        .camera-bg-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%;
+            max-width: 900px;
+            opacity: 0.35; 
+            z-index: 0; 
+            pointer-events: none; 
+        }
+
+        @media (min-width: 768px) {
+            .camera-bg-container {
+                width: 80%;
+            }
+        }
+
         main, footer {
             position: relative;
             z-index: 10;
@@ -133,13 +151,13 @@
             border-color: #FF7A00;
         }
 
-        @keyframes scroll-arrow-float {
-            0% { transform: translateY(0); opacity: 0.4; }
-            50% { transform: translateY(10px); opacity: 1; }
-            100% { transform: translateY(0); opacity: 0.4; }
+        @keyframes scroll-arrow-down {
+            0% { transform: translateY(-10px); opacity: 0; }
+            50% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(10px); opacity: 0; }
         }
         .scroll-arrow-anim {
-            animation: scroll-arrow-float 2.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+            animation: scroll-arrow-down 2s ease-in-out infinite;
         }
 
         .no-scrollbar::-webkit-scrollbar {
@@ -201,13 +219,43 @@
     </header>
 
     <main id="view-home" class="view-section active">
-        <section class="relative min-h-screen flex flex-col justify-center items-center px-6 pt-20 text-center overflow-hidden">
+        <section id="hero-section" class="relative min-h-screen flex flex-col justify-center items-center px-6 pt-20 text-center overflow-hidden">
+            
+            <div class="camera-bg-container" id="camera-container">
+                <svg viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="cam-body">
+                        <rect x="200" y="220" width="400" height="230" rx="12" stroke="white" stroke-width="3" stroke-opacity="0.5"/>
+                        <line x1="200" y1="280" x2="600" y2="280" stroke="white" stroke-width="2" stroke-opacity="0.2"/>
+                    </g>
+                    <g id="cam-grip">
+                        <path d="M 600 220 C 640 220, 650 350, 600 450" stroke="white" stroke-width="3" stroke-opacity="0.5"/>
+                    </g>
+                    <g id="cam-viewfinder">
+                        <rect x="200" y="200" width="100" height="20" rx="4" stroke="white" stroke-width="3" stroke-opacity="0.5"/>
+                    </g>
+                    <g id="cam-rec">
+                        <rect x="550" y="210" width="40" height="10" rx="4" fill="#FF7A00"/>
+                        <circle cx="280" cy="250" r="10" fill="#FF0000" fill-opacity="0.8"/>
+                    </g>
+                    <g id="cam-lens-back">
+                        <circle cx="430" cy="340" r="110" stroke="white" stroke-width="3" stroke-opacity="0.4"/>
+                    </g>
+                    <g id="cam-lens-mid">
+                        <circle cx="430" cy="340" r="85" stroke="#FF7A00" stroke-width="4" stroke-opacity="0.9"/>
+                    </g>
+                    <g id="cam-lens-front">
+                        <circle cx="430" cy="340" r="60" stroke="white" stroke-width="2" stroke-opacity="0.6"/>
+                        <circle cx="450" cy="320" r="15" fill="white" fill-opacity="0.2"/>
+                    </g>
+                </svg>
+            </div>
+
             <div class="max-w-5xl mx-auto z-10 mb-20">
-                <h1 class="text-4xl md:text-7xl font-bold tracking-tight mb-6 reveal leading-tight">
+                <h1 class="text-4xl md:text-7xl font-bold tracking-tight mb-6 reveal leading-tight drop-shadow-lg">
                     Videomaking e Content Marketing<br/>
                     <span class="text-accent">per Aziende e Creator.</span>
                 </h1>
-                <p class="text-lg md:text-xl text-graytext mb-10 max-w-3xl mx-auto reveal font-light leading-relaxed">
+                <p class="text-lg md:text-xl text-graytext mb-10 max-w-3xl mx-auto reveal font-light leading-relaxed drop-shadow-md">
                     Affianco brand e creator nella loro comunicazione online. Non mi limito a girare e montare: studio la strategia visiva più adatta per farti raggiungere il tuo pubblico, aumentare la tua visibilità e valorizzare concretamente ciò che offri.
                 </p>
                 <div class="reveal">
@@ -218,10 +266,10 @@
                 </div>
             </div>
             
-            <div class="absolute bottom-10 left-0 right-0 flex flex-col items-center pointer-events-none">
-                <div class="flex flex-col items-center gap-2 reveal">
-                    <span class="text-[10px] uppercase tracking-[0.3em] text-graytext font-semibold mb-1">Esplora</span>
-                    <i data-lucide="chevron-down" class="w-6 h-6 text-accent scroll-arrow-anim"></i>
+            <div class="absolute bottom-10 left-0 right-0 flex flex-col items-center pointer-events-none z-10">
+                <div class="flex flex-col items-center gap-2 reveal opacity-60">
+                    <span class="text-[10px] uppercase tracking-[0.3em] text-graytext font-semibold mb-1 drop-shadow-md">Esplora</span>
+                    <i data-lucide="chevron-down" class="w-6 h-6 text-accent scroll-arrow-anim drop-shadow-md"></i>
                 </div>
             </div>
         </section>
@@ -277,10 +325,12 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="flex flex-col items-center gap-2 reveal pointer-events-none">
-                    <span class="text-[10px] uppercase tracking-[0.3em] text-graytext font-semibold mb-1">Esplora</span>
-                    <i data-lucide="chevron-down" class="w-6 h-6 text-accent scroll-arrow-anim"></i>
+            <div class="absolute bottom-10 left-0 right-0 flex flex-col items-center pointer-events-none z-10">
+                <div class="flex flex-col items-center gap-2 reveal opacity-60">
+                    <span class="text-[10px] uppercase tracking-[0.3em] text-graytext font-semibold mb-1 drop-shadow-md">Esplora</span>
+                    <i data-lucide="chevron-down" class="w-6 h-6 text-accent scroll-arrow-anim drop-shadow-md"></i>
                 </div>
             </div>
         </section>
@@ -298,15 +348,17 @@
                         Il mio lavoro è tradurre questa pratica in risultati per il tuo business. Che tu voglia posizionare il tuo brand, vendere un prodotto o far crescere la tua community, sviluppo i video e la strategia per farti raggiungere l'obiettivo.
                     </p>
                 </div>
+            </div>
 
-                <div class="flex flex-col items-center gap-2 reveal pointer-events-none">
-                    <span class="text-[10px] uppercase tracking-[0.3em] text-graytext font-semibold mb-1">Esplora</span>
-                    <i data-lucide="chevron-down" class="w-6 h-6 text-accent scroll-arrow-anim"></i>
+            <div class="absolute bottom-10 left-0 right-0 flex flex-col items-center pointer-events-none z-10">
+                <div class="flex flex-col items-center gap-2 reveal opacity-60">
+                    <span class="text-[10px] uppercase tracking-[0.3em] text-graytext font-semibold mb-1 drop-shadow-md">Esplora</span>
+                    <i data-lucide="chevron-down" class="w-6 h-6 text-accent scroll-arrow-anim drop-shadow-md"></i>
                 </div>
             </div>
         </section>
 
-        <section class="py-32 px-6 bg-white/[0.01]" id="servizi">
+        <section class="py-32 px-6 bg-white/[0.01] relative" id="servizi">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center mb-20 reveal">
                     <h2 class="text-3xl md:text-5xl font-bold mb-4">I <span class="text-accent">Miei</span> Servizi</h2>
@@ -355,8 +407,8 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 reveal" id="portfolio-grid">
                 
                 <div class="work-item group social-marketing relative aspect-[9/16] rounded-3xl overflow-hidden glass-card cursor-pointer" 
-                     onclick="openVideoModal('https://www.instagram.com/reel/DPL010oDCoY/embed', 'MyField Ferrara - Strength & Conditioning', true)">
-                    <img src="https://i.ibb.co/gMJTLSTY/591165588-852379984205909-5376029182675258672-n.jpg" alt="Copertina" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                     onclick="openVideoModal('https://www.instagram.com/reel/DR9apqAjKQb/embed', 'MyField Ferrara - Reel', true)">
+                    <img src="https://i.ibb.co/zTgwr8gs/573826072-18322924789245966-5227600504376843283-n.jpg" alt="Copertina" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <div class="absolute inset-0 flex items-center justify-center z-10">
                         <i data-lucide="play-circle" class="w-16 h-16 text-white/80 group-hover:text-accent transition-all"></i>
                     </div>
@@ -380,6 +432,30 @@
                     </div>
                 </div>
 
+                <div class="work-item group social-marketing relative aspect-[9/16] rounded-3xl overflow-hidden glass-card cursor-pointer" 
+                     onclick="openVideoModal('https://www.instagram.com/reel/DPL010oDCoY/embed', 'MyField Ferrara - Strength & Conditioning', true)">
+                    <img src="https://i.ibb.co/gMJTLSTY/591165588-852379984205909-5376029182675258672-n.jpg" alt="Copertina" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 flex items-center justify-center z-10">
+                        <i data-lucide="play-circle" class="w-16 h-16 text-white/80 group-hover:text-accent transition-all"></i>
+                    </div>
+                    <div class="work-overlay absolute inset-0 p-6 flex flex-col justify-end z-20">
+                        <span class="text-accent text-xs font-bold uppercase tracking-widest mb-2">Social Marketing</span>
+                        <h4 class="text-xl font-bold text-white">MyField Ferrara - Reel</h4>
+                    </div>
+                </div>
+
+                <div class="work-item group social-marketing relative aspect-[9/16] rounded-3xl overflow-hidden glass-card cursor-pointer" 
+                     onclick="openVideoModal('https://www.instagram.com/reel/DO0w_-nDDWM/embed', 'MyField Ferrara - Reels', true)">
+                    <img src="https://i.ibb.co/5hpvJ8fF/550829170-1870878360453409-8070565456234247393-n.jpg" alt="Copertina" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 flex items-center justify-center z-10">
+                        <i data-lucide="play-circle" class="w-16 h-16 text-white/80 group-hover:text-accent transition-all"></i>
+                    </div>
+                    <div class="work-overlay absolute inset-0 p-6 flex flex-col justify-end z-20">
+                        <span class="text-accent text-xs font-bold uppercase tracking-widest mb-2">Social Marketing</span>
+                        <h4 class="text-xl font-bold text-white">MyField Ferrara - Reels</h4>
+                    </div>
+                </div>
+
                 <div class="work-item group personal-projects relative aspect-video rounded-3xl overflow-hidden glass-card cursor-pointer" 
                      onclick="openVideoModal('https://www.youtube.com/embed/ZYBKlJY46wA', 'Reel Instagram 2026', false)">
                     <img src="https://i.ibb.co/cSKN7y5Z/ZYBKl-JY46w-A-HD.jpg" 
@@ -391,18 +467,6 @@
                     <div class="work-overlay absolute inset-0 p-6 flex flex-col justify-end z-20">
                         <span class="text-accent text-xs font-bold uppercase tracking-widest mb-2">Personal Projects</span>
                         <h4 class="text-xl font-bold text-white">Reel Instagram 2026</h4>
-                    </div>
-                </div>
-
-                <div class="work-item group social-marketing relative aspect-[9/16] rounded-3xl overflow-hidden glass-card cursor-pointer" 
-                     onclick="openVideoModal('https://www.instagram.com/reel/DO0w_-nDDWM/embed', 'MyField Ferrara - Content Strategy', true)">
-                    <img src="https://i.ibb.co/5hpvJ8fF/550829170-1870878360453409-8070565456234247393-n.jpg" alt="Copertina" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 flex items-center justify-center z-10">
-                        <i data-lucide="play-circle" class="w-16 h-16 text-white/80 group-hover:text-accent transition-all"></i>
-                    </div>
-                    <div class="work-overlay absolute inset-0 p-6 flex flex-col justify-end z-20">
-                        <span class="text-accent text-xs font-bold uppercase tracking-widest mb-2">Social Marketing</span>
-                        <h4 class="text-xl font-bold text-white">MyField Ferrara - Reels</h4>
                     </div>
                 </div>
 
@@ -513,10 +577,7 @@
         function scrollCarousel(id, direction) {
             const carousel = document.getElementById(id);
             const scrollAmount = carousel.offsetWidth;
-            carousel.scrollBy({
-                left: direction * scrollAmount,
-                behavior: 'smooth'
-            });
+            carousel.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
         }
 
         function navigate(viewId) {
@@ -525,9 +586,7 @@
             if(target) {
                 target.classList.add('active');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
-                if(viewId === 'lavori') {
-                    filterPortfolio('social-marketing');
-                }
+                if(viewId === 'lavori') { filterPortfolio('social-marketing'); }
                 setTimeout(initScrollAnimations, 100);
             }
         }
@@ -556,20 +615,48 @@
             });
         }
 
-        function openVideoModal(url, title, isVertical = false) {
+        // Funzione Universale Aggiornata: Gestisce sia URL Iframe che Template HTML Raw
+        function openVideoModal(contentSource, title, isVertical = false, isRawHTML = false) {
             const modal = document.getElementById('videoModal');
             const content = document.getElementById('videoModalContent');
             const container = document.getElementById('videoContainer');
             const titleEl = document.getElementById('videoTitle');
             titleEl.innerText = title;
-            container.innerHTML = `<iframe src="${url}" class="w-full h-full" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
-            if (isVertical) {
-                content.classList.remove('max-w-5xl', 'aspect-video');
-                content.classList.add('max-w-[380px]', 'w-full', 'aspect-[9/16]');
+
+            // Pulisce le classi di dimensione precedenti
+            content.classList.remove('max-w-[450px]', 'h-[85vh]', 'max-w-5xl', 'aspect-video', 'max-w-[380px]', 'aspect-[9/16]');
+
+            if (isRawHTML) {
+                // Se è HTML Raw (es. Instagram Embed via Template)
+                const template = document.getElementById(contentSource);
+                if(template) {
+                    // Contenitore bianco con scroll per IG
+                    container.innerHTML = `<div class="w-full h-full overflow-y-auto bg-white flex justify-center pt-4" style="-webkit-overflow-scrolling: touch;">${template.innerHTML}</div>`;
+                    // Forza il caricamento dello script di Instagram
+                    if (window.instgrm) {
+                        window.instgrm.Embeds.process();
+                    } else {
+                        const script = document.createElement('script');
+                        script.src = "https://www.instagram.com/embed.js";
+                        script.async = true;
+                        document.body.appendChild(script);
+                    }
+                }
             } else {
-                content.classList.remove('max-w-[380px]', 'aspect-[9/16]');
+                // Se è un URL standard (es. YouTube, Reel Iframe)
+                container.innerHTML = `<iframe src="${contentSource}" class="w-full h-full" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+            }
+            
+            // Applica le nuove classi di dimensione
+            if (isVertical) {
+                // Se è HTML Raw (IG) serve un po' più largo, altrimenti stretto per i Reel Iframe
+                const widthClass = isRawHTML ? 'max-w-[450px]' : 'max-w-[380px]';
+                content.classList.add(widthClass, 'w-full', 'aspect-[9/16]');
+                if(isRawHTML) content.classList.add('h-[85vh]'); // Altezza fissa per lo scroll di IG
+            } else {
                 content.classList.add('max-w-5xl', 'w-full', 'aspect-video');
             }
+            
             modal.classList.remove('opacity-0', 'pointer-events-none');
             content.classList.remove('scale-95');
             content.classList.add('scale-100');
@@ -627,18 +714,6 @@
             }, 300);
         }
 
-        function initScrollAnimations() {
-            const reveals = document.querySelectorAll('.reveal');
-            const revealOnScroll = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) entry.target.classList.add('active');
-                });
-            }, { threshold: 0.1 });
-            reveals.forEach(r => revealOnScroll.observe(r));
-        }
-
-        document.addEventListener('DOMContentLoaded', initScrollAnimations);
-
         function toggleContactModal() {
             const modal = document.getElementById('contactModal');
             const content = document.getElementById('contactModalContent');
@@ -655,6 +730,50 @@
                 document.body.style.overflow = '';
             }
         }
+
+        function initScrollAnimations() {
+            const reveals = document.querySelectorAll('.reveal');
+            const revealOnScroll = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('active');
+                });
+            }, { threshold: 0.1 });
+            reveals.forEach(r => revealOnScroll.observe(r));
+        }
+
+        function initCameraScroll() {
+            if (typeof gsap === 'undefined') return;
+            gsap.registerPlugin(ScrollTrigger);
+
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: "#hero-section", 
+                    start: "top top", 
+                    end: "bottom top", 
+                    scrub: 1.5, 
+                }
+            });
+
+            // Assemblaggio rapido all'inizio
+            tl.fromTo("#cam-body", { y: 200 }, { y: 0, duration: 0.5 }, 0)
+              .fromTo("#cam-grip", { x: 150 }, { x: 0, duration: 0.5 }, 0)
+              .fromTo("#cam-viewfinder", { y: -150, x: -80 }, { y: 0, x: 0, duration: 0.5 }, 0)
+              .fromTo("#cam-lens-back", { x: -200, scale: 0.6 }, { x: 0, scale: 1, duration: 0.5 }, 0)
+              .fromTo("#cam-lens-mid", { x: 200, scale: 1.4 }, { x: 0, scale: 1, duration: 0.5 }, 0)
+              .fromTo("#cam-lens-front", { y: 200, scale: 1.8 }, { y: 0, scale: 1, duration: 0.5 }, 0)
+              .fromTo("#cam-rec", { y: -200 }, { y: 0, duration: 0.5 }, 0);
+
+            // Pausa lunga per far godere il layout
+            tl.to({}, { duration: 3 });
+
+            // Fade out prima di entrare in "Brand e Aziende"
+            tl.to("#camera-container", { opacity: 0, y: -50, duration: 1 });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initScrollAnimations();
+            initCameraScroll();
+        });
 
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('navbar');
