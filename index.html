@@ -36,8 +36,8 @@
         .glass-card:hover { transform: translateY(-8px); border-color: rgba(255, 122, 0, 0.3); box-shadow: 0 20px 40px -10px rgba(255, 122, 0, 0.1); }
         .glass-modal { background: rgba(15, 15, 15, 0.85); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); }
         .ambient-glow { position: absolute; width: 200%; max-width: 1000px; aspect-ratio: 1/1; background: radial-gradient(circle, rgba(255,122,0,0.3) 0%, rgba(0,0,0,0) 70%); top: -20vh; left: 50%; transform: translateX(-50%); z-index: 0; pointer-events: none; }
-        .camera-bg-container { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 120%; max-width: 900px; opacity: 0.35; z-index: 0; pointer-events: none; }
-        @media (min-width: 768px) { .camera-bg-container { width: 80%; } }
+        .camera-bg-container { position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); width: 130%; max-width: 1100px; opacity: 0.35; z-index: 0; pointer-events: none; }
+        @media (min-width: 768px) { .camera-bg-container { width: 85%; top: 50%; } }
         main, footer { position: relative; z-index: 10; }
         .reveal { opacity: 0; transform: translateY(50px); will-change: transform, opacity; }
         @keyframes scroll-arrow-down { 0% { transform: translateY(-10px); opacity: 0; } 50% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(10px); opacity: 0; } }
@@ -45,10 +45,18 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         .chat-button { position: fixed; bottom: 2rem; right: 2rem; z-index: 130; display: flex; align-items: center; justify-content: center; background-color: #FF7A00; color: white; border-radius: 9999px; text-decoration: none; transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.3s; white-space: nowrap; overflow: hidden; min-width: 4rem; height: 4rem; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); border: none; cursor: pointer; }
+        @media (max-width: 768px) {
+            .chat-button { bottom: 1.5rem; right: 1.5rem; height: 3.5rem; min-width: 3.5rem; }
+            .chat-button.expanded { max-width: 220px; }
+        }
         .chat-button:hover { transform: scale(1.1); }
         #chat-text { max-width: 0; opacity: 0; font-size: 0px; transition: all 0.5s ease; font-family: 'Inter', sans-serif; font-weight: 600; }
         .chat-button.expanded { padding: 0 1.5rem; max-width: 350px; }
         .chat-button.expanded #chat-text { max-width: 250px; opacity: 1; font-size: 16px; margin-left: 12px; }
+        @media (max-width: 768px) { .chat-button.expanded #chat-text { font-size: 12px; } }
+        .carousel-btn { background: rgba(255, 122, 0, 0.15); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 122, 0, 0.3); color: #FF7A00; transition: all 0.3s ease; }
+        .carousel-btn:hover { background: rgba(255, 122, 0, 0.3); transform: scale(1.1); }
+        .carousel-btn:active { transform: scale(0.9); }
     </style>
 </head>
 <body class="antialiased selection:bg-accent selection:text-white">
@@ -86,7 +94,7 @@
     </header>
 
     <main>
-        <section id="hero-section" class="relative min-h-screen flex flex-col justify-center items-center px-6 pt-20 text-center overflow-hidden">
+        <section id="hero-section" class="relative min-h-screen md:min-h-screen flex flex-col justify-center items-center px-6 pt-24 pb-10 md:pb-20 text-center overflow-hidden">
             <div class="camera-bg-container" id="camera-container">
                 <svg viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="cam-body"><rect x="200" y="220" width="400" height="230" rx="12" stroke="white" stroke-width="3" stroke-opacity="0.5"/><line x1="200" y1="280" x2="600" y2="280" stroke="white" stroke-width="2" stroke-opacity="0.2"/></g>
@@ -98,68 +106,91 @@
                     <g id="cam-lens-front"><circle cx="430" cy="340" r="60" stroke="white" stroke-width="2" stroke-opacity="0.6"/><circle cx="450" cy="320" r="15" fill="white" fill-opacity="0.2"/></g>
                 </svg>
             </div>
-            <div class="max-w-5xl mx-auto z-10 mb-20">
-                <h1 class="text-4xl md:text-7xl font-bold tracking-tight mb-6 reveal leading-tight drop-shadow-lg">Videomaking e Content Marketing<br/><span class="text-accent">per Aziende e Creator.</span></h1>
-                <p class="text-lg md:text-xl text-graytext mb-10 max-w-3xl mx-auto reveal font-light leading-relaxed drop-shadow-md">Affianco brand e creator nella loro comunicazione online. Non mi limito a girare e montare: studio la strategia visiva più adatta per farti raggiungere il tuo pubblico, aumentare la tua visibilità e valorizzare concretamente ciò che offri.</p>
-                <div class="reveal">
+            
+            <div class="max-w-5xl mx-auto z-10 flex flex-col items-center">
+                <h1 class="text-3xl md:text-7xl font-bold tracking-tight mb-6 md:mb-8 reveal leading-tight drop-shadow-lg">Videomaking e Content Marketing<br/><span class="text-accent">per Aziende e Creator.</span></h1>
+                <p class="text-base md:text-xl text-graytext mb-10 md:mb-12 max-w-3xl mx-auto reveal font-light leading-relaxed drop-shadow-md px-4">Affianco brand e creator nella loro comunicazione online. Non mi limito a girare e montare: studio la strategia visiva più adatta per farti raggiungere il tuo pubblico, aumentare la tua visibilità e valorizzare concretamente ciò che offri.</p>
+                
+                <div class="reveal mb-12 md:mb-16">
                     <a href="lavori.html" class="inline-flex items-center gap-2 bg-accent hover:bg-accentHover text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105">Guarda i miei lavori <i data-lucide="arrow-right" class="w-5 h-5"></i></a>
                 </div>
-            </div>
-            <div class="absolute bottom-10 left-0 right-0 flex flex-col items-center pointer-events-none z-10">
-                <div class="flex flex-col items-center gap-2 reveal opacity-60">
-                    <span class="text-[10px] uppercase tracking-[0.3em] text-graytext font-semibold mb-1 drop-shadow-md">Esplora</span>
+
+                <div class="flex flex-col items-center gap-3 reveal opacity-60 w-full">
+                    <span class="text-[10px] uppercase tracking-[0.3em] text-graytext font-semibold drop-shadow-md">Esplora</span>
                     <i data-lucide="chevron-down" class="w-6 h-6 text-accent scroll-arrow-anim drop-shadow-md"></i>
                 </div>
             </div>
         </section>
 
-        <section class="py-24 border-y border-white/5 bg-white/[0.01] relative" id="trust">
+        <section class="py-12 md:py-24 border-y border-white/5 bg-white/[0.01] relative" id="trust">
             <div class="max-w-7xl mx-auto px-6 relative">
-                <p class="text-center text-lg md:text-xl font-bold text-white uppercase tracking-widest mb-16 reveal">Brand, aziende e creator che hanno <span class="text-accent">scelto me</span></p>
-                <div class="relative group reveal mb-20">
-                    <div id="trust-carousel" class="flex md:flex-wrap justify-start md:justify-center items-center gap-6 overflow-x-auto md:overflow-visible no-scrollbar snap-x snap-mandatory">
-                        <div class="logo-item snap-center shrink-0 w-[calc((100vw-48px-24px)/3)] md:w-36 aspect-square"><a href="https://listhen.it/" target="_blank" class="glass-card flex items-center justify-center p-2 w-full h-full rounded-xl overflow-hidden shadow-sm"><img src="https://i.ibb.co/Fq6Zjkcs/5fc678930737a300019b2dc9-198x149-1x.jpg" alt="Logo" class="w-full h-full object-cover rounded-lg"></a></div>
-                        <div class="logo-item snap-center shrink-0 w-[calc((100vw-48px-24px)/3)] md:w-36 aspect-square"><a href="https://www.instagram.com/gl_personalcoaching" target="_blank" class="glass-card flex items-center justify-center p-2 w-full h-full rounded-xl overflow-hidden shadow-sm"><img src="https://i.ibb.co/FLPmYXfb/489281375-1028214965952045-1239755772869026008-n.jpg" alt="Logo" class="w-full h-full object-cover rounded-lg"></a></div>
-                        <div class="logo-item snap-center shrink-0 w-[calc((100vw-48px-24px)/3)] md:w-36 aspect-square"><a href="https://www.instagram.com/myfield_ferrara" target="_blank" class="glass-card flex items-center justify-center p-2 w-full h-full rounded-xl overflow-hidden shadow-sm"><img src="https://i.ibb.co/R4Tqp4sY/557341010-18318057052245966-1725807342095357201-n.jpg" alt="Logo" class="w-full h-full object-cover rounded-lg"></a></div>
-                        <div class="logo-item snap-center shrink-0 w-[calc((100vw-48px-24px)/3)] md:w-36 aspect-square"><a href="https://www.youtube.com/@matteomarzolla" target="_blank" class="glass-card flex items-center justify-center p-2 w-full h-full rounded-xl overflow-hidden shadow-sm"><img src="https://i.ibb.co/N6DpQ6Nd/382536263-1008036383653544-2987748808624428400-n.jpg" alt="Logo" class="w-full h-full object-cover rounded-lg"></a></div>
-                        <div class="logo-item snap-center shrink-0 w-[calc((100vw-48px-24px)/3)] md:w-36 aspect-square"><a href="https://www.youtube.com/@microfonodelcestista" target="_blank" class="glass-card flex items-center justify-center p-2 w-full h-full rounded-xl overflow-hidden shadow-sm"><img src="https://i.ibb.co/S4YwfpPJ/551969315-18061557443526725-7935004091035072684-n.jpg" alt="Logo" class="w-full h-full object-cover rounded-lg"></a></div>
-                        <div class="logo-item snap-center shrink-0 w-[calc((100vw-48px-24px)/3)] md:w-36 aspect-square"><a href="https://www.instagram.com/allylabkids" target="_blank" class="glass-card flex items-center justify-center p-2 w-full h-full rounded-xl overflow-hidden shadow-sm"><img src="https://i.ibb.co/C59rk2dY/626271930-18557913100017226-2595093498704943689-n.jpg" alt="Logo" class="w-full h-full object-cover rounded-lg"></a></div>
+                <p class="text-center text-base md:text-xl font-bold text-white uppercase tracking-widest mb-10 md:mb-16 reveal">Brand, aziende e creator che hanno <span class="text-accent">scelto me</span></p>
+                
+                <div class="relative group reveal mb-12 md:mb-20 px-2">
+                    <div class="absolute -left-2 md:-left-6 top-1/2 -translate-y-1/2 z-20 flex md:hidden">
+                        <button onclick="scrollCarousel('trust-carousel', -1)" class="carousel-btn w-12 h-12 rounded-full flex items-center justify-center shadow-lg active:scale-95">
+                            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                        </button>
+                    </div>
+                    <div class="absolute -right-2 md:-right-6 top-1/2 -translate-y-1/2 z-20 flex md:hidden">
+                        <button onclick="scrollCarousel('trust-carousel', 1)" class="carousel-btn w-12 h-12 rounded-full flex items-center justify-center shadow-lg active:scale-95">
+                            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                        </button>
+                    </div>
+
+                    <div id="trust-carousel" class="flex md:flex-wrap justify-start md:justify-center items-center gap-4 md:gap-6 overflow-x-auto md:overflow-visible no-scrollbar snap-x snap-mandatory px-4">
+                        <div class="logo-item snap-center shrink-0 w-[calc((100vw-100px)/3)] md:w-36 aspect-square"><a href="https://listhen.it/" target="_blank" class="glass-card flex items-center justify-center p-2 w-full h-full rounded-xl overflow-hidden shadow-sm"><img src="https://i.ibb.co/Fq6Zjkcs/5fc678930737a300019b2dc9-198x149-1x.jpg" alt="Logo" class="w-full h-full object-cover rounded-lg"></a></div>
+                        <div class="logo-item snap-center shrink-0 w-[calc((100vw-100px)/3)] md:w-36 aspect-square"><a href="https://www.instagram.com/gl_personalcoaching" target="_blank" class="glass-card flex items-center justify-center p-2 w-full h-full rounded-xl overflow-hidden shadow-sm"><img src="https://i.ibb.co/FLPmYXfb/489281375-1028214965952045-1239755772869026008-n.jpg" alt="Logo" class="w-full h-full object-cover rounded-lg"></a></div>
+                        <div class="logo-item snap-center shrink-0 w-[calc((100vw-100px)/3)] md:w-36 aspect-square"><a href="https://www.instagram.com/myfield_ferrara" target="_blank" class="glass-card flex items-center justify-center p-2 w-full h-full rounded-xl overflow-hidden shadow-sm"><img src="https://i.ibb.co/R4Tqp4sY/557341010-18318057052245966-1725807342095357201-n.jpg" alt="Logo" class="w-full h-full object-cover rounded-lg"></a></div>
+                        <div class="logo-item snap-center shrink-0 w-[calc((100vw-100px)/3)] md:w-36 aspect-square"><a href="https://www.youtube.com/@matteomarzolla" target="_blank" class="glass-card flex items-center justify-center p-2 w-full h-full rounded-xl overflow-hidden shadow-sm"><img src="https://i.ibb.co/N6DpQ6Nd/382536263-1008036383653544-2987748808624428400-n.jpg" alt="Logo" class="w-full h-full object-cover rounded-lg"></a></div>
+                        <div class="logo-item snap-center shrink-0 w-[calc((100vw-100px)/3)] md:w-36 aspect-square"><a href="https://www.youtube.com/@microfonodelcestista" target="_blank" class="glass-card flex items-center justify-center p-2 w-full h-full rounded-xl overflow-hidden shadow-sm"><img src="https://i.ibb.co/S4YwfpPJ/551969315-18061557443526725-7935004091035072684-n.jpg" alt="Logo" class="w-full h-full object-cover rounded-lg"></a></div>
+                        <div class="logo-item snap-center shrink-0 w-[calc((100vw-100px)/3)] md:w-36 aspect-square"><a href="https://www.instagram.com/allylabkids" target="_blank" class="glass-card flex items-center justify-center p-2 w-full h-full rounded-xl overflow-hidden shadow-sm"><img src="https://i.ibb.co/C59rk2dY/626271930-18557913100017226-2595093498704943689-n.jpg" alt="Logo" class="w-full h-full object-cover rounded-lg"></a></div>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <section class="py-32 px-6 relative" id="metodo">
-            <div class="max-w-4xl mx-auto">
-                <h2 class="text-3xl md:text-5xl font-bold mb-12 text-center reveal">Dalla <span class="text-accent">Pratica</span> alla <span class="text-accent">Strategia</span></h2>
-                <div class="glass-card p-8 md:p-12 rounded-3xl reveal mb-20">
-                    <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-6 font-light">Ciao, sono Teo, videomaker specializzato in content marketing. Ho imparato questo mestiere nell'unico modo che conta davvero: facendolo. Ore passate a studiare format, dinamiche social e tecniche di montaggio per capire esattamente come si trasforma l'attenzione di un utente in un'azione concreta.</p>
-                    <p class="text-lg md:text-xl text-gray-300 leading-relaxed font-light">Il mio lavoro è tradurre questa pratica in risultati per il tuo business. Che tu voglia posizionare il tuo brand, vendere un prodotto o far crescere la tua community, sviluppo i video e la strategia per farti raggiungere l'obiettivo.</p>
+                <div class="flex flex-col items-center gap-2 reveal opacity-60 w-full mt-8">
+                    <span class="text-[10px] uppercase tracking-[0.3em] text-graytext font-semibold mb-1">Esplora</span>
+                    <i data-lucide="chevron-down" class="w-6 h-6 text-accent scroll-arrow-anim"></i>
                 </div>
             </div>
         </section>
 
-        <section class="py-32 px-6 bg-white/[0.01] relative" id="servizi">
+        <section class="py-20 md:py-32 px-6 relative" id="metodo">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-2xl md:text-5xl font-bold mb-8 md:mb-12 reveal">Dalla <span class="text-accent">Pratica</span> alla <span class="text-accent">Strategia</span></h2>
+                <div class="glass-card p-6 md:p-12 rounded-3xl reveal mb-12 md:mb-20 text-left">
+                    <p class="text-base md:text-xl text-gray-300 leading-relaxed mb-6 font-light">Ciao, sono Teo, videomaker specializzato in content marketing. Ho imparato questo mestiere nell'unico modo che conta davvero: facendolo. Ore passate a studiare format, dinamiche social e tecniche di montaggio per capire esattamente come si trasforma l'attenzione di un utente in un'azione concreta.</p>
+                    <p class="text-base md:text-xl text-gray-300 leading-relaxed font-light">Il mio lavoro è tradurre questa pratica in risultati per il tuo business. Che tu voglia posizionare il tuo brand, vendere un prodotto o far crescere la tua community, sviluppo i video e la strategia per farti raggiungere l'obiettivo.</p>
+                </div>
+
+                <div class="flex flex-col items-center gap-2 reveal opacity-60 w-full">
+                    <span class="text-[10px] uppercase tracking-[0.3em] text-graytext font-semibold mb-1">Esplora</span>
+                    <i data-lucide="chevron-down" class="w-6 h-6 text-accent scroll-arrow-anim"></i>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 md:py-32 px-6 bg-white/[0.01] relative" id="servizi">
             <div class="max-w-7xl mx-auto">
-                <div class="text-center mb-20 reveal">
-                    <h2 class="text-3xl md:text-5xl font-bold mb-4">I <span class="text-accent">Miei</span> Servizi</h2>
-                    <p class="text-graytext text-lg max-w-2xl mx-auto font-light">Ecosistemi visivi completi per dominare l'attenzione online.</p>
+                <div class="text-center mb-12 md:mb-20 reveal">
+                    <h2 class="text-2xl md:text-5xl font-bold mb-4">I <span class="text-accent">Miei</span> Servizi</h2>
+                    <p class="text-graytext text-base md:text-lg max-w-2xl mx-auto font-light">Ecosistemi visivi completi per dominare l'attenzione online.</p>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="servizi-grid">
-                    <div class="glass-card p-8 rounded-3xl reveal service-card">
-                        <div class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center mb-8 border border-white/10 text-accent"><i data-lucide="video" class="w-7 h-7"></i></div>
-                        <h3 class="text-2xl font-bold mb-4 text-white">Videomaking</h3>
-                        <p class="text-graytext leading-relaxed font-light">Dal set alla ripresa. Riprese cinematografiche e dinamiche, strutturate nativamente per performare.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8" id="servizi-grid">
+                    <div class="glass-card p-6 md:p-8 rounded-3xl reveal service-card">
+                        <div class="w-12 h-12 md:w-14 md:h-14 bg-white/5 rounded-2xl flex items-center justify-center mb-6 md:mb-8 border border-white/10 text-accent"><i data-lucide="video" class="w-6 h-6 md:w-7 md:h-7"></i></div>
+                        <h3 class="text-xl md:text-2xl font-bold mb-4 text-white">Videomaking</h3>
+                        <p class="text-graytext text-sm md:text-base leading-relaxed font-light">Dal set alla ripresa. Riprese cinematografiche e dinamiche, strutturate nativamente per performare.</p>
                     </div>
-                    <div class="glass-card p-8 rounded-3xl reveal service-card">
-                        <div class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center mb-8 border border-white/10 text-accent"><i data-lucide="scissors" class="w-7 h-7"></i></div>
-                        <h3 class="text-2xl font-bold mb-4 text-white">Video Editing</h3>
-                        <p class="text-graytext leading-relaxed font-light">Il montaggio è dove nasce la magia. Ritmo incalzante e sound design immersivo.</p>
+                    <div class="glass-card p-6 md:p-8 rounded-3xl reveal service-card">
+                        <div class="w-12 h-12 md:w-14 md:h-14 bg-white/5 rounded-2xl flex items-center justify-center mb-6 md:mb-8 border border-white/10 text-accent"><i data-lucide="scissors" class="w-6 h-6 md:w-7 md:h-7"></i></div>
+                        <h3 class="text-xl md:text-2xl font-bold mb-4 text-white">Video Editing</h3>
+                        <p class="text-graytext text-sm md:text-base leading-relaxed font-light">Il montaggio è dove nasce la magia. Ritmo incalzante e sound design immersivo.</p>
                     </div>
-                    <div class="glass-card p-8 rounded-3xl reveal service-card">
-                        <div class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center mb-8 border border-white/10 text-accent"><i data-lucide="lightbulb" class="w-7 h-7"></i></div>
-                        <h3 class="text-2xl font-bold mb-4 text-white">Strategia e Scripting</h3>
-                        <p class="text-graytext leading-relaxed font-light">Format su misura e script strutturati per massimizzare la retention e convertire l'attenzione in azione.</p>
+                    <div class="glass-card p-6 md:p-8 rounded-3xl reveal service-card">
+                        <div class="w-12 h-12 md:w-14 md:h-14 bg-white/5 rounded-2xl flex items-center justify-center mb-8 border border-white/10 text-accent"><i data-lucide="lightbulb" class="w-6 h-6 md:w-7 md:h-7"></i></div>
+                        <h3 class="text-xl md:text-2xl font-bold mb-4 text-white">Strategia e Scripting</h3>
+                        <p class="text-graytext text-sm md:text-base leading-relaxed font-light">Format su misura e script strutturati per massimizzare la retention e convertire l'attenzione in azione.</p>
                     </div>
                 </div>
             </div>
@@ -171,14 +202,14 @@
             &copy; <script>document.write(new Date().getFullYear())</script> Matteo Maria Macauda. P.IVA 02153520891.
         </p>
         <div class="px-6">
-            <p class="text-[10px] text-white/20 max-w-3xl mx-auto leading-relaxed uppercase tracking-widest">
+            <p class="text-[9px] md:text-[10px] text-white/20 max-w-3xl mx-auto leading-relaxed uppercase tracking-widest">
                 Tutti i diritti riservati. Ogni contenuto visivo, testuale e il codice sorgente di questo sito sono di proprietà esclusiva dell'autore. Ne è vietata la riproduzione, la distribuzione e l'utilizzo non autorizzato, anche parziale, senza esplicito consenso scritto.
             </p>
         </div>
     </footer>
 </div> 
 
-    <button id="chat-pill" onclick="toggleContactModal()" class="chat-button">
+    <button id="chat-pill" onclick="toggleContactModal()" class="chat-button shadow-2xl">
         <i data-lucide="message-square" class="w-7 h-7 shrink-0"></i>
         <span id="chat-text">Parliamo del tuo progetto?</span>
     </button>
@@ -187,23 +218,23 @@
         <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="toggleContactModal()"></div>
         <div class="glass-modal w-full max-w-md p-8 rounded-3xl relative transform translate-y-10 transition-transform duration-500 shadow-2xl" id="contactModalContent">
             <button onclick="toggleContactModal()" class="absolute top-6 right-6 text-graytext hover:text-white"><i data-lucide="x" class="w-6 h-6"></i></button>
-            <h3 class="text-3xl font-bold mb-2 text-white">E adesso? <br/><span class="text-accent">Contattami!</span></h3>
-            <div class="space-y-4 mt-8">
+            <h3 class="text-2xl md:text-3xl font-bold mb-2 text-white">E adesso? <br/><span class="text-accent">Contattami!</span></h3>
+            <div class="space-y-3 mt-6">
                 <a href="https://wa.me/message/KBRZEPY2IJFTA1" target="_blank" class="flex items-center gap-4 p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-accent/50 transition-all group">
-                    <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-accent"><i data-lucide="message-circle" class="w-5 h-5"></i></div>
-                    <div><div class="text-xs text-graytext font-bold">WhatsApp</div><div class="font-medium text-white">Scrivimi ora</div></div>
+                    <div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent"><i data-lucide="message-circle" class="w-5 h-5"></i></div>
+                    <div><div class="text-[10px] text-graytext font-bold uppercase tracking-wider">WhatsApp</div><div class="text-sm md:text-base font-medium text-white">Scrivimi ora</div></div>
                 </a>
                 <a href="tel:+393784142773" class="flex items-center gap-4 p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-accent/50 transition-all group">
-                    <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-accent"><i data-lucide="phone" class="w-5 h-5"></i></div>
-                    <div><div class="text-xs text-graytext font-bold">Chiamata</div><div class="font-medium text-white">+39 378 414 2773</div></div>
+                    <div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent"><i data-lucide="phone" class="w-5 h-5"></i></div>
+                    <div><div class="text-[10px] text-graytext font-bold uppercase tracking-wider">Chiamata</div><div class="text-sm md:text-base font-medium text-white">+39 378 414 2773</div></div>
                 </a>
                 <a href="mailto:matteomacaudaprod@gmail.com" class="flex items-center gap-4 p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-accent/50 transition-all group">
-                    <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-accent"><i data-lucide="mail" class="w-5 h-5"></i></div>
-                    <div><div class="text-xs text-graytext font-bold">Email</div><div class="font-medium text-white break-all">matteomacaudaprod@gmail.com</div></div>
+                    <div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent"><i data-lucide="mail" class="w-5 h-5"></i></div>
+                    <div><div class="text-[10px] text-graytext font-bold uppercase tracking-wider">Email</div><div class="text-xs md:text-sm font-medium text-white break-all">matteomacaudaprod@gmail.com</div></div>
                 </a>
                 <a href="https://www.instagram.com/teo.macauda" target="_blank" class="flex items-center gap-4 p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-accent/50 transition-all group">
-                    <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-accent"><i data-lucide="instagram" class="w-5 h-5"></i></div>
-                    <div><div class="text-xs text-graytext font-bold">Instagram</div><div class="font-medium text-white">@teo.macauda</div></div>
+                    <div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent"><i data-lucide="instagram" class="w-5 h-5"></i></div>
+                    <div><div class="text-[10px] text-graytext font-bold uppercase tracking-wider">Instagram</div><div class="text-sm md:text-base font-medium text-white">@teo.macauda</div></div>
                 </a>
             </div>
         </div>
@@ -211,6 +242,12 @@
 
     <script>
         lucide.createIcons();
+
+        function scrollCarousel(id, direction) {
+            const carousel = document.getElementById(id);
+            const scrollAmount = carousel.offsetWidth * 0.8;
+            carousel.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+        }
 
         function toggleMobileMenu() {
             const menu = document.getElementById('mobileMenu');
@@ -254,11 +291,8 @@
             }
         }
 
-        /* ANIMAZIONI SOFT & SLOW */
         function initScrollAnimations() {
             gsap.registerPlugin(ScrollTrigger);
-
-            // Elementi generici - Entrata molto soffice (1.8s)
             const reveals = document.querySelectorAll('.reveal:not(.logo-item):not(.service-card)');
             reveals.forEach((el) => {
                 gsap.to(el, {
@@ -273,8 +307,6 @@
                     ease: "power3.out"
                 });
             });
-
-            // Loghi Brand a cascata lenta
             gsap.to(".logo-item", {
                 scrollTrigger: {
                     trigger: "#trust-carousel",
@@ -286,8 +318,6 @@
                 stagger: 0.25,
                 ease: "power2.out"
             });
-
-            // Card Servizi - L'effetto più burroso (1.8s di durata)
             gsap.to(".service-card", {
                 scrollTrigger: {
                     trigger: "#servizi-grid",
@@ -325,7 +355,6 @@
         document.addEventListener('DOMContentLoaded', () => {
             initScrollAnimations();
             initCameraScroll();
-
             const pill = document.getElementById('chat-pill');
             if(pill) {
                 setTimeout(() => { pill.classList.add('expanded'); }, 3000);
