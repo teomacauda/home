@@ -179,6 +179,7 @@
             scrollbar-width: none;
         }
 
+        /* --- STILI CHAT BUTTON AGGIORNATI --- */
         .chat-button {
             position: fixed;
             bottom: 2rem; 
@@ -196,7 +197,7 @@
             overflow: hidden;
             min-width: 4rem; 
             height: 4rem; 
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Ombra più tenue */
             border: none;
             cursor: pointer;
         }
@@ -224,6 +225,28 @@
             opacity: 1;
             font-size: 16px;
             margin-left: 12px;
+        }
+
+        /* Ottimizzazione specifica per Mobile: niente sovrapposizioni fastidiose */
+        @media (max-width: 768px) {
+            .chat-button {
+                bottom: 1.5rem; /* Più vicino al bordo */
+                right: 1.5rem;
+                height: 3.5rem; /* Leggermente più piccolo */
+                min-width: 3.5rem;
+            }
+            .chat-button svg {
+                width: 1.5rem;
+                height: 1.5rem;
+            }
+            .chat-button.expanded {
+                padding: 0 1.2rem;
+                max-width: calc(100vw - 3rem); /* Previene l'uscita dai bordi dello schermo */
+            }
+            .chat-button.expanded #chat-text {
+                font-size: 14px; /* Testo più piccolo */
+                margin-left: 8px;
+            }
         }
     </style>
 </head>
@@ -592,7 +615,9 @@
         </p>
     </div>
 
-</div> <div id="videoModal" class="fixed inset-0 z-[150] flex items-center justify-center px-4 md:px-20 opacity-0 pointer-events-none transition-opacity duration-300">
+</div> 
+
+    <div id="videoModal" class="fixed inset-0 z-[150] flex items-center justify-center px-4 md:px-20 opacity-0 pointer-events-none transition-opacity duration-300">
         <div class="absolute inset-0 bg-black/95 backdrop-blur-xl" onclick="closeVideoModal()"></div>
         <div class="relative glass-modal rounded-3xl overflow-hidden transform scale-95 transition-all duration-500 flex flex-col" id="videoModalContent">
             <button onclick="closeVideoModal()" class="absolute top-4 right-4 z-[170] text-white/50 hover:text-white transition-colors bg-black/40 p-2 rounded-full backdrop-blur-md">
