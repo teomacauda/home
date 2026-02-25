@@ -40,6 +40,15 @@
         @media (min-width: 768px) { .camera-bg-container { width: 85%; top: 50%; } }
         main, footer { position: relative; z-index: 10; }
         .reveal { opacity: 0; transform: translateY(50px); will-change: transform, opacity; }
+        
+        /* Modifica specifica per caricamento immediato su Desktop */
+        @media (min-width: 768px) {
+            .reveal.desktop-immediate {
+                opacity: 0.6 !important;
+                transform: translateY(0) !important;
+            }
+        }
+
         @keyframes scroll-arrow-down { 0% { transform: translateY(-10px); opacity: 0; } 50% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(10px); opacity: 0; } }
         .scroll-arrow-anim { animation: scroll-arrow-down 2s ease-in-out infinite; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -83,7 +92,7 @@
         </div>
         <div id="mobileMenu" class="fixed inset-0 z-[110] flex items-start justify-center px-6 pt-24 opacity-0 pointer-events-none transition-all duration-300">
             <div class="absolute inset-0 bg-black/85 backdrop-blur-2xl" onclick="toggleMobileMenu()"></div>
-            <div id="mobileMenuContent" class="bg-[#0F0F0F] border border-white/10 w-full max-w-sm p-8 rounded-3xl relative transform -translate-y-10 transition-transform duration-500 shadow-[0_30px_60px_rgba(0,0,0,0.9)]">
+            <div id="mobileMenuContent" class="bg-[#0F0F0F] border border-white/10 w-full max-sm p-8 rounded-3xl relative transform -translate-y-10 transition-transform duration-500 shadow-[0_30px_60px_rgba(0,0,0,0.9)]">
                 <nav class="flex flex-col gap-8 text-left">
                     <a href="/" class="flex items-center gap-4 text-2xl font-bold text-white hover:text-accent transition-colors group"><i data-lucide="home" class="w-6 h-6 text-accent/50 group-hover:text-accent"></i> Home</a>
                     <a href="lavori.html" class="flex items-center gap-4 text-2xl font-bold text-white hover:text-accent transition-colors group"><i data-lucide="folder-kanban" class="w-6 h-6 text-accent/50 group-hover:text-accent"></i> Lavori</a>
@@ -94,7 +103,7 @@
     </header>
 
     <main>
-        <section id="hero-section" class="relative min-h-screen md:min-h-screen flex flex-col justify-center items-center px-6 pt-24 pb-10 md:pb-20 text-center overflow-hidden">
+        <section id="hero-section" class="relative min-h-[85vh] md:min-h-screen flex flex-col justify-center items-center px-6 pt-24 pb-12 md:pb-20 text-center overflow-hidden">
             <div class="camera-bg-container" id="camera-container">
                 <svg viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="cam-body"><rect x="200" y="220" width="400" height="230" rx="12" stroke="white" stroke-width="3" stroke-opacity="0.5"/><line x1="200" y1="280" x2="600" y2="280" stroke="white" stroke-width="2" stroke-opacity="0.2"/></g>
@@ -115,7 +124,7 @@
                     <a href="lavori.html" class="inline-flex items-center gap-2 bg-accent hover:bg-accentHover text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105">Guarda i miei lavori <i data-lucide="arrow-right" class="w-5 h-5"></i></a>
                 </div>
 
-                <div class="flex flex-col items-center gap-3 reveal opacity-60 w-full">
+                <div class="flex flex-col items-center gap-3 reveal desktop-immediate opacity-60 w-full md:absolute md:bottom-12 md:inset-x-0 md:flex md:flex-col md:items-center">
                     <span class="text-[10px] uppercase tracking-[0.3em] text-graytext font-semibold drop-shadow-md">Esplora</span>
                     <i data-lucide="chevron-down" class="w-6 h-6 text-accent scroll-arrow-anim drop-shadow-md"></i>
                 </div>
