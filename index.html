@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it" class="scroll-smooth overflow-x-hidden">
+<html lang="it" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -36,9 +36,18 @@
     </script>
 
     <style>
+        /* CORREZIONE 1: Previene categoricamente l'overflow orizzontale */
         html, body {
             background-color: #000000;
             color: #ffffff;
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* CORREZIONE 2: Usa un overlay contenitivo per evitare che body "rompa" i layout su iOS */
+        #page-wrapper {
             overflow-x: hidden;
             width: 100%;
             position: relative;
@@ -76,12 +85,14 @@
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
+        /* CORREZIONE 3: Ambient glow responsivo per non sfondare il body */
         .ambient-glow {
             position: absolute;
-            width: 1000px;
-            height: 1000px;
+            width: 200%; /* Invece di pixel fissi, usa % */
+            max-width: 1000px;
+            aspect-ratio: 1/1;
             background: radial-gradient(circle, rgba(255,122,0,0.3) 0%, rgba(0,0,0,0) 70%);
-            top: -500px;
+            top: -20vh;
             left: 50%;
             transform: translateX(-50%);
             z-index: 0;
@@ -167,9 +178,58 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+
+        .chat-button {
+            position: fixed;
+            bottom: 2rem; 
+            right: 2rem;  
+            z-index: 130; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #FF7A00; 
+            color: white;
+            border-radius: 9999px; 
+            text-decoration: none;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.3s;
+            white-space: nowrap;
+            overflow: hidden;
+            min-width: 4rem; 
+            height: 4rem; 
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); 
+            border: none;
+            cursor: pointer;
+        }
+
+        .chat-button:hover {
+            transform: scale(1.1); 
+        }
+
+        #chat-text {
+            max-width: 0;
+            opacity: 0;
+            font-size: 0px;
+            transition: all 0.5s ease;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+        }
+
+        .chat-button.expanded {
+            padding: 0 1.5rem;
+            max-width: 350px;
+        }
+
+        .chat-button.expanded #chat-text {
+            max-width: 250px;
+            opacity: 1;
+            font-size: 16px;
+            margin-left: 12px;
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-accent selection:text-white">
+
+<div id="page-wrapper">
 
     <div class="ambient-glow"></div>
 
@@ -532,7 +592,7 @@
         </p>
     </div>
 
-    <div id="videoModal" class="fixed inset-0 z-[150] flex items-center justify-center px-4 md:px-20 opacity-0 pointer-events-none transition-opacity duration-300">
+</div> <div id="videoModal" class="fixed inset-0 z-[150] flex items-center justify-center px-4 md:px-20 opacity-0 pointer-events-none transition-opacity duration-300">
         <div class="absolute inset-0 bg-black/95 backdrop-blur-xl" onclick="closeVideoModal()"></div>
         <div class="relative glass-modal rounded-3xl overflow-hidden transform scale-95 transition-all duration-500 flex flex-col" id="videoModalContent">
             <button onclick="closeVideoModal()" class="absolute top-4 right-4 z-[170] text-white/50 hover:text-white transition-colors bg-black/40 p-2 rounded-full backdrop-blur-md">
@@ -545,8 +605,9 @@
         </div>
     </div>
 
-    <button onclick="toggleContactModal()" class="fixed bottom-8 right-8 z-[130] bg-accent text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg btn-floating transition-transform hover:scale-110">
-        <i data-lucide="message-square" class="w-7 h-7"></i>
+    <button id="chat-pill" onclick="toggleContactModal()" class="chat-button">
+        <i data-lucide="message-square" class="w-7 h-7 shrink-0"></i>
+        <span id="chat-text">Parliamo del tuo progetto?</span>
     </button>
 
     <div id="contactModal" class="fixed inset-0 z-[140] flex items-center justify-center px-4 opacity-0 pointer-events-none transition-opacity duration-300">
@@ -615,7 +676,6 @@
             });
         }
 
-        // Funzione Universale Aggiornata: Gestisce sia URL Iframe che Template HTML Raw
         function openVideoModal(contentSource, title, isVertical = false, isRawHTML = false) {
             const modal = document.getElementById('videoModal');
             const content = document.getElementById('videoModalContent');
@@ -623,16 +683,12 @@
             const titleEl = document.getElementById('videoTitle');
             titleEl.innerText = title;
 
-            // Pulisce le classi di dimensione precedenti
             content.classList.remove('max-w-[450px]', 'h-[85vh]', 'max-w-5xl', 'aspect-video', 'max-w-[380px]', 'aspect-[9/16]');
 
             if (isRawHTML) {
-                // Se è HTML Raw (es. Instagram Embed via Template)
                 const template = document.getElementById(contentSource);
                 if(template) {
-                    // Contenitore bianco con scroll per IG
                     container.innerHTML = `<div class="w-full h-full overflow-y-auto bg-white flex justify-center pt-4" style="-webkit-overflow-scrolling: touch;">${template.innerHTML}</div>`;
-                    // Forza il caricamento dello script di Instagram
                     if (window.instgrm) {
                         window.instgrm.Embeds.process();
                     } else {
@@ -643,16 +699,13 @@
                     }
                 }
             } else {
-                // Se è un URL standard (es. YouTube, Reel Iframe)
                 container.innerHTML = `<iframe src="${contentSource}" class="w-full h-full" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
             }
             
-            // Applica le nuove classi di dimensione
             if (isVertical) {
-                // Se è HTML Raw (IG) serve un po' più largo, altrimenti stretto per i Reel Iframe
                 const widthClass = isRawHTML ? 'max-w-[450px]' : 'max-w-[380px]';
                 content.classList.add(widthClass, 'w-full', 'aspect-[9/16]');
-                if(isRawHTML) content.classList.add('h-[85vh]'); // Altezza fissa per lo scroll di IG
+                if(isRawHTML) content.classList.add('h-[85vh]');
             } else {
                 content.classList.add('max-w-5xl', 'w-full', 'aspect-video');
             }
@@ -754,7 +807,6 @@
                 }
             });
 
-            // Assemblaggio rapido all'inizio
             tl.fromTo("#cam-body", { y: 200 }, { y: 0, duration: 0.5 }, 0)
               .fromTo("#cam-grip", { x: 150 }, { x: 0, duration: 0.5 }, 0)
               .fromTo("#cam-viewfinder", { y: -150, x: -80 }, { y: 0, x: 0, duration: 0.5 }, 0)
@@ -763,16 +815,28 @@
               .fromTo("#cam-lens-front", { y: 200, scale: 1.8 }, { y: 0, scale: 1, duration: 0.5 }, 0)
               .fromTo("#cam-rec", { y: -200 }, { y: 0, duration: 0.5 }, 0);
 
-            // Pausa lunga per far godere il layout
             tl.to({}, { duration: 3 });
-
-            // Fade out prima di entrare in "Brand e Aziende"
             tl.to("#camera-container", { opacity: 0, y: -50, duration: 1 });
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             initScrollAnimations();
             initCameraScroll();
+
+            const pill = document.getElementById('chat-pill');
+            if(pill) {
+                setTimeout(() => {
+                    pill.classList.add('expanded');
+                }, 3000);
+
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 50) {
+                        pill.classList.remove('expanded');
+                    } else {
+                        pill.classList.add('expanded');
+                    }
+                });
+            }
         });
 
         window.addEventListener('scroll', () => {
