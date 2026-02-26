@@ -84,6 +84,20 @@
         .placeholder-soon { background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(255,122,0,0.02) 100%); position: relative; }
         .placeholder-soon::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(255,122,0,0.05) 0%, transparent 70%); }
         .title-blur { width: 140px; height: 18px; background: rgba(255,255,255,0.05); border-radius: 4px; filter: blur(4px); }
+
+        /* Animazioni Fluttuanti per Decorazioni SVG */
+        @keyframes float-slow {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+        @keyframes float-slow-reverse {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(20px) rotate(-2deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+        .anim-float-1 { animation: float-slow 8s ease-in-out infinite; }
+        .anim-float-2 { animation: float-slow-reverse 10s ease-in-out infinite; }
     </style>
 </head>
 <body class="antialiased selection:bg-accent selection:text-white">
@@ -144,11 +158,28 @@
             <p class="text-graytext text-lg md:text-xl font-light reveal leading-relaxed">Risorse, workflow e asset pronti all'uso. Ho creato questi strumenti per aiutarti a ottimizzare il tuo lavoro e <span class="text-white font-medium">risparmiare tempo prezioso</span>.</p>
         </section>
 
-        <!-- Griglia Prodotti (Singolo elemento centrato) -->
-        <section class="max-w-7xl mx-auto flex justify-center">
+        <!-- Griglia Prodotti (Singolo elemento centrato con grafiche ai lati) -->
+        <section class="max-w-7xl mx-auto flex justify-center items-center relative py-12">
             
+            <!-- Grafica Decorativa Sinistra (Viewfinder/Focus) -->
+            <div class="absolute left-[5%] xl:left-[10%] top-1/2 -translate-y-1/2 opacity-20 pointer-events-none hidden md:flex items-center justify-center anim-float-1 z-0 reveal">
+                <div class="absolute inset-0 bg-accent/10 blur-[60px] rounded-full scale-150"></div>
+                <svg width="240" height="240" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg" class="relative z-10">
+                    <circle cx="120" cy="120" r="118" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                    <circle cx="120" cy="120" r="90" stroke="#FF7A00" stroke-width="1" stroke-opacity="0.2" stroke-dasharray="4 8"/>
+                    <circle cx="120" cy="120" r="60" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                    <!-- Angoli mirino -->
+                    <path d="M 40 60 L 40 40 L 60 40" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+                    <path d="M 200 60 L 200 40 L 180 40" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+                    <path d="M 40 180 L 40 200 L 60 200" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+                    <path d="M 200 180 L 200 200 L 180 200" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+                    <!-- Crocetta centrale -->
+                    <path d="M 120 105 L 120 135 M 105 120 L 135 120" stroke="#FF7A00" stroke-width="1" stroke-opacity="0.5"/>
+                </svg>
+            </div>
+
             <!-- Prodotto: Coming Soon (Centrato) -->
-            <div class="w-full max-w-[340px]">
+            <div class="w-full max-w-[340px] relative z-10">
                 <div class="glass-card rounded-[2rem] p-5 reveal group opacity-60">
                     <div class="product-img-container placeholder-soon">
                         <i data-lucide="lock" class="w-10 h-10 text-white/10 group-hover:scale-110 transition-transform duration-500"></i>
@@ -163,6 +194,27 @@
                         CONTENUTO BLOCCATO
                     </div>
                 </div>
+            </div>
+
+            <!-- Grafica Decorativa Destra (Timeline/Griglia) -->
+            <div class="absolute right-[5%] xl:right-[10%] top-1/2 -translate-y-1/2 opacity-20 pointer-events-none hidden md:flex items-center justify-center anim-float-2 z-0 reveal">
+                <div class="absolute inset-0 bg-white/5 blur-[60px] rounded-full scale-150"></div>
+                <svg width="240" height="240" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg" class="relative z-10">
+                    <!-- Pattern Griglia -->
+                    <defs>
+                        <pattern id="dot-grid" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                            <circle cx="2" cy="2" r="1.5" fill="rgba(255,255,255,0.1)"/>
+                        </pattern>
+                    </defs>
+                    <rect width="240" height="240" fill="url(#dot-grid)"/>
+                    <!-- Blocchi Timeline Fluttuanti -->
+                    <rect x="40" y="80" width="160" height="20" rx="4" fill="rgba(255,122,0,0.1)" stroke="rgba(255,122,0,0.3)" stroke-width="1"/>
+                    <rect x="80" y="110" width="120" height="20" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                    <rect x="40" y="140" width="90" height="20" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                    <!-- Barra del Playhead -->
+                    <path d="M 100 60 L 100 180" stroke="#FF7A00" stroke-width="1" stroke-opacity="0.6"/>
+                    <polygon points="95,60 105,60 100,70" fill="#FF7A00" fill-opacity="0.8"/>
+                </svg>
             </div>
 
         </section>
@@ -257,4 +309,3 @@
 
 </body>
 </html>
-
