@@ -68,11 +68,18 @@
             </a>
             
             <nav class="hidden md:flex gap-4 text-sm font-medium text-graytext">
-                <a href="lavori.html" class="px-5 py-2.5 rounded-full border border-accent bg-accent/10 text-white transition-all duration-300">
+                <a href="/" class="px-5 py-2.5 rounded-full border border-accent hover:border-accent/30 hover:bg-accent/10 hover:text-white transition-all duration-300">
+                    Home
+                </a>
+                <!-- Tasto Lavori Attivo (Solid Orange) -->
+                <a href="/lavori.html" class="px-5 py-2.5 rounded-full bg-accent text-white shadow-[0_10px_20px_-5px_rgba(255,122,0,0.3)] transition-all duration-300">
                     Lavori
                 </a>
                 <a href="/#servizi" class="px-5 py-2.5 rounded-full border border-accent hover:border-accent/30 hover:bg-accent/10 hover:text-white transition-all duration-300">
                     Servizi
+                </a>
+                <a href="/toolbox.html" class="px-5 py-2.5 rounded-full border border-accent hover:border-accent/30 hover:bg-accent/10 hover:text-white transition-all duration-300">
+                    Toolbox
                 </a>
             </nav>
 
@@ -84,16 +91,19 @@
 
         <div id="mobileMenu" class="fixed inset-0 z-[110] flex items-start justify-center px-6 pt-24 opacity-0 pointer-events-none transition-all duration-300">
             <div class="absolute inset-0 bg-black/85 backdrop-blur-2xl" onclick="toggleMobileMenu()"></div>
-            <div id="mobileMenuContent" class="bg-[#0F0F0F] border border-white/10 w-full max-w-sm p-8 rounded-3xl relative transform -translate-y-10 transition-transform duration-500 shadow-[0_30px_60px_rgba(0,0,0,0.9)]">
+            <div id="mobileMenuContent" class="bg-[#0F0F0F] border border-white/10 w-full max-sm p-8 rounded-3xl relative transform -translate-y-10 transition-transform duration-500 shadow-[0_30px_60px_rgba(0,0,0,0.9)]">
                 <nav class="flex flex-col gap-8 text-left">
                     <a href="/" class="flex items-center gap-4 text-2xl font-bold text-white hover:text-accent transition-colors group">
                         <i data-lucide="home" class="w-6 h-6 text-accent/50 group-hover:text-accent"></i> Home
                     </a>
-                    <a href="lavori.html" class="flex items-center gap-4 text-2xl font-bold text-white hover:text-accent transition-colors group">
-                        <i data-lucide="folder-kanban" class="w-6 h-6 text-accent/50 group-hover:text-accent"></i> Lavori
+                    <a href="/lavori.html" class="flex items-center gap-4 text-2xl font-bold text-accent transition-colors group">
+                        <i data-lucide="folder-kanban" class="w-6 h-6 text-accent group-hover:text-accent"></i> Lavori
                     </a>
                     <a href="/#servizi" onclick="toggleMobileMenu()" class="flex items-center gap-4 text-2xl font-bold text-white hover:text-accent transition-colors group">
                         <i data-lucide="layers" class="w-6 h-6 text-accent/50 group-hover:text-accent"></i> Servizi
+                    </a>
+                    <a href="/toolbox.html" class="flex items-center gap-4 text-2xl font-bold text-white hover:text-accent transition-colors group">
+                        <i data-lucide="package" class="w-6 h-6 text-accent/50 group-hover:text-accent"></i> Toolbox
                     </a>
                 </nav>
             </div>
@@ -173,15 +183,17 @@
         </div>
     </main>
 
-    <footer class="py-12 text-center border-t border-white/5 relative z-10">
-        <p class="text-graytext text-sm">&copy; <script>document.write(new Date().getFullYear())</script> Matteo Maria Macauda. P.IVA 02153520891.</p>
-    </footer>
-
-    <div class="pb-12 text-center px-6 relative z-10">
-        <p class="text-[10px] text-white/30 max-w-2xl mx-auto leading-relaxed">
-            Ogni contenuto visivo, testuale e il codice sorgente di questo sito sono di proprietà esclusiva dell'autore. È vietata la riproduzione, anche parziale, senza autorizzazione scritta.
+    <!-- Footer Sistemato come da Screenshot -->
+    <footer class="py-12 text-center border-t border-white/5 relative z-10 px-6">
+        <p class="text-white/90 text-sm md:text-base mb-4 font-medium">
+            &copy; 2026 Matteo Maria Macauda. P.IVA 02153520891.
         </p>
-    </div>
+        <div class="max-w-4xl mx-auto">
+            <p class="text-[9px] md:text-[10px] text-white/20 leading-relaxed uppercase tracking-[0.2em]">
+                TUTTI I DIRITTI RISERVATI. OGNI CONTENUTO VISIVO, TESTUALE E IL CODICE SORGENTE DI QUESTO SITO SONO DI PROPRIETÀ ESCLUSIVA DELL'AUTORE. NE È VIETATA LA RIPRODUZIONE, LA DISTRIBUZIONE E L'UTILIZZO NON AUTORIZZATO, ANCHE PARZIALE, SENZA ESPLICITO CONSENSO SCRITTO.
+            </p>
+        </div>
+    </footer>
 
 </div> 
 
