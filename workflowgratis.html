@@ -55,7 +55,7 @@
         .glass-card:hover { transform: translateY(-8px); border-color: rgba(255, 122, 0, 0.4); box-shadow: 0 20px 40px -10px rgba(255, 122, 0, 0.15); }
         
         .ambient-glow { position: absolute; width: 150%; max-width: 800px; aspect-ratio: 1/1; background: radial-gradient(circle, rgba(255,122,0,0.12) 0%, rgba(0,0,0,0) 70%); top: -10vh; right: -10%; z-index: 0; pointer-events: none; }
-        .reveal { opacity: 0; transform: translateY(30px); }
+        .reveal, .reveal-early { opacity: 0; transform: translateY(30px); }
         
         /* Product Specific Styles */
         .btn-download {
@@ -224,12 +224,12 @@
         </div>
         </div> 
 
-        <div class="flex flex-col items-center gap-2 w-full mt-16 md:mt-24 opacity-60">
+        <div id="esplora-section" class="flex flex-col items-center gap-2 w-full mt-6 md:mt-10 opacity-0">
             <span class="text-[10px] uppercase tracking-[0.3em] text-graytext font-semibold">Esplora</span>
             <i data-lucide="chevron-down" class="w-6 h-6 text-accent animate-bounce"></i>
         </div>
 
-        <div class="reveal mt-20 mb-40 w-full flex flex-col items-center">
+        <div class="reveal-early mt-20 mb-40 w-full flex flex-col items-center">
             
             <div class="w-[88%] md:w-full max-w-4xl text-center">
                 
@@ -313,6 +313,7 @@
     function initAnimations() {
         gsap.registerPlugin(ScrollTrigger);
         
+        // Animazioni di base pagina
         const reveals = document.querySelectorAll('.reveal');
         reveals.forEach((el, i) => {
             gsap.to(el, {
@@ -327,6 +328,30 @@
                 delay: i * 0.15,
                 ease: "power3.out"
             });
+        });
+
+        // Apparizione video anticipata
+        const revealsEarly = document.querySelectorAll('.reveal-early');
+        revealsEarly.forEach((el, i) => {
+            gsap.to(el, {
+                scrollTrigger: {
+                    trigger: el,
+                    start: "top 100%", 
+                    toggleActions: "play none none none"
+                },
+                opacity: 1,
+                y: 0,
+                duration: 1.2,
+                ease: "power3.out"
+            });
+        });
+
+        // Apparizione Esplora automatica all'apertura
+        gsap.to('#esplora-section', {
+            opacity: 0.6,
+            duration: 1.2,
+            delay: 0.8,
+            ease: "power3.out"
         });
     }
 
