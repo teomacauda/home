@@ -141,7 +141,16 @@
             <div class="max-w-7xl mx-auto px-6 relative">
                 <p class="text-center text-base md:text-xl font-bold text-white uppercase tracking-widest mb-10 md:mb-16 reveal">Brand, aziende e creator che hanno <span class="text-accent">scelto me</span></p>
                 
-                <div class="relative group reveal mb-12 md:mb-20 px-2">
+                <div class="relative group reveal mb-12 md:mb-20 px-2 overflow-hidden md:overflow-visible">
+                    
+                    <!-- Frecce indicatrici scroll mobile -->
+                    <div id="trust-scroll-left" class="absolute left-0 top-0 bottom-0 w-12 md:w-16 bg-gradient-to-r from-black via-black/80 to-transparent z-10 flex items-center justify-start pl-1 md:hidden pointer-events-none opacity-0 transition-opacity duration-300">
+                        <i data-lucide="chevron-left" class="w-8 h-8 text-white/70"></i>
+                    </div>
+                    <div id="trust-scroll-right" class="absolute right-0 top-0 bottom-0 w-12 md:w-16 bg-gradient-to-l from-black via-black/80 to-transparent z-10 flex items-center justify-end pr-1 md:hidden pointer-events-none opacity-100 transition-opacity duration-300">
+                        <i data-lucide="chevron-right" class="w-8 h-8 text-white/70 animate-pulse"></i>
+                    </div>
+
                     <div id="trust-carousel" class="flex md:flex-wrap justify-start md:justify-center items-center gap-4 md:gap-6 overflow-x-auto md:overflow-visible no-scrollbar snap-x snap-mandatory px-4">
                         <div class="logo-item snap-center shrink-0 w-[calc((100vw-100px)/3)] md:w-36 aspect-square"><a href="https://listhen.it/" target="_blank" class="glass-card flex items-center justify-center p-2 w-full h-full rounded-xl overflow-hidden shadow-sm"><img src="https://i.ibb.co/Fq6Zjkcs/5fc678930737a300019b2dc9-198x149-1x.jpg" alt="Logo" class="w-full h-full object-cover rounded-lg"></a></div>
                         <div class="logo-item snap-center shrink-0 w-[calc((100vw-100px)/3)] md:w-36 aspect-square"><a href="https://www.instagram.com/gl_personalcoaching" target="_blank" class="glass-card flex items-center justify-center p-2 w-full h-full rounded-xl overflow-hidden shadow-sm"><img src="https://i.ibb.co/FLPmYXfb/489281375-1028214965952045-1239755772869026008-n.jpg" alt="Logo" class="w-full h-full object-cover rounded-lg"></a></div>
@@ -342,9 +351,97 @@
             tl.to("#camera-container", { opacity: 0, y: -50, duration: 1 });
         }
 
+        // --- FUNZIONE PER L'EFFETTO "SIPARIO" SOLO DA DESKTOP ---
+        function initDesktopPinAnimation() {
+            if (typeof gsap === 'undefined') return;
+
+            let mm = gsap.matchMedia();
+
+            mm.add("(min-width: 1024px)", () => {
+                const trustSection = document.getElementById('trust');
+                const trustText = trustSection.querySelector('p');
+                const trustLogos = trustSection.querySelectorAll('.logo-item');
+
+                if(!trustSection || !trustText || trustLogos.length === 0) return;
+
+                gsap.set("#metodo", { zIndex: 10, position: "relative" });
+                gsap.set(trustSection, { zIndex: 5 });
+
+                let tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: trustSection,
+                        start: "top 25%", 
+                        end: () => "+=" + (trustSection.offsetHeight + 150), 
+                        pin: true,
+                        pinSpacing: false, 
+                        scrub: 1.2, 
+                    }
+                });
+
+                tl.to(trustText, { opacity: 0, scale: 0.95, y: -30, duration: 0.3 }, 0);
+                tl.to(trustSection, {
+                    borderTopColor: "rgba(255, 255, 255, 0)",
+                    borderBottomColor: "rgba(255, 255, 255, 0)",
+                    backgroundColor: "rgba(255, 255, 255, 0)",
+                    duration: 0.3
+                }, 0);
+
+                const mid = trustLogos.length / 2;
+                trustLogos.forEach((logo, i) => {
+                    let isLeft = i < mid;
+                    let distanceFromCenter = isLeft ? (mid - i) : (i - mid + 1);
+                    let dir = isLeft ? -1 : 1;
+
+                    tl.to(logo, {
+                        x: () => dir * (window.innerWidth * 0.4 + (distanceFromCenter * 80)),
+                        y: () => (Math.random() - 0.5) * 100, 
+                        rotation: dir * (10 + distanceFromCenter * 15), 
+                        scale: 0.6, 
+                        opacity: 0,
+                        duration: 1,
+                        ease: "power2.inOut"
+                    }, 0);
+                });
+            });
+        }
+
+        // --- NUOVA FUNZIONE PER INDICATORI SCROLL SU MOBILE ---
+        function initMobileCarouselIndicators() {
+            const trustCarousel = document.getElementById('trust-carousel');
+            const scrollLeftIndicator = document.getElementById('trust-scroll-left');
+            const scrollRightIndicator = document.getElementById('trust-scroll-right');
+
+            if (trustCarousel && scrollLeftIndicator && scrollRightIndicator) {
+                // Aggiungiamo un listener allo scroll del carosello
+                trustCarousel.addEventListener('scroll', () => {
+                    
+                    // Gestione freccia sinistra (compare se ho scrollato un po')
+                    if (trustCarousel.scrollLeft > 10) {
+                        scrollLeftIndicator.classList.remove('opacity-0');
+                        scrollLeftIndicator.classList.add('opacity-100');
+                    } else {
+                        scrollLeftIndicator.classList.remove('opacity-100');
+                        scrollLeftIndicator.classList.add('opacity-0');
+                    }
+
+                    // Gestione freccia destra (scompare se sono arrivato alla fine)
+                    if (trustCarousel.scrollLeft >= (trustCarousel.scrollWidth - trustCarousel.clientWidth - 10)) {
+                        scrollRightIndicator.classList.remove('opacity-100');
+                        scrollRightIndicator.classList.add('opacity-0');
+                    } else {
+                        scrollRightIndicator.classList.remove('opacity-0');
+                        scrollRightIndicator.classList.add('opacity-100');
+                    }
+                });
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             initScrollAnimations();
             initCameraScroll();
+            initDesktopPinAnimation(); 
+            initMobileCarouselIndicators(); // <-- Richiamo la nuova funzione qua!
+            
             const pill = document.getElementById('chat-pill');
             if(pill) {
                 setTimeout(() => { pill.classList.add('expanded'); }, 3000);
