@@ -41,7 +41,6 @@
         main, footer { position: relative; z-index: 10; }
         .reveal { opacity: 0; transform: translateY(50px); will-change: transform, opacity; }
         
-        /* Forza apparizione immediata senza scroll (usata per Hero Esplora) */
         .reveal.immediate-show {
             opacity: 0.6 !important;
             transform: translateY(0) !important;
@@ -79,22 +78,30 @@
                     <path d="M657.833,584.167L657.833,287.083L432.667,722.792L207.5,287.042L207.5,584.167L138.417,584.167L138.417,138.458L207.5,138.458L432.667,574.708L657.833,138.458L726.917,138.458L726.917,584.167L657.833,584.167Z" style="fill:white;fill-rule:nonzero;"/>
                 </svg>
             </a>
+            
             <nav class="hidden md:flex gap-4 text-sm font-medium text-graytext">
-                <a href="lavori.html" class="px-5 py-2.5 rounded-full border border-accent hover:border-accent/30 hover:bg-accent/10 hover:text-white transition-all duration-300">Lavori</a>
+                <a href="/lavori.html" class="px-5 py-2.5 rounded-full border border-accent hover:border-accent/30 hover:bg-accent/10 hover:text-white transition-all duration-300">Lavori</a>
                 <a href="/#servizi" class="px-5 py-2.5 rounded-full border border-accent hover:border-accent/30 hover:bg-accent/10 hover:text-white transition-all duration-300">Servizi</a>
+                <!-- Nuovo Tasto Toolbox -->
+                <a href="/toolbox.html" class="px-5 py-2.5 rounded-full border border-accent hover:border-accent/30 hover:bg-accent/10 hover:text-white transition-all duration-300">Toolbox</a>
             </nav>
+
             <button onclick="toggleMobileMenu()" class="md:hidden text-graytext hover:text-white transition-colors p-2 focus:outline-none relative z-[120]">
                 <i data-lucide="menu" id="icon-menu" class="w-7 h-7 block"></i>
                 <i data-lucide="x" id="icon-x" class="w-7 h-7 hidden"></i>
             </button>
         </div>
+
+        <!-- Mobile Menu -->
         <div id="mobileMenu" class="fixed inset-0 z-[110] flex items-start justify-center px-6 pt-24 opacity-0 pointer-events-none transition-all duration-300">
             <div class="absolute inset-0 bg-black/85 backdrop-blur-2xl" onclick="toggleMobileMenu()"></div>
             <div id="mobileMenuContent" class="bg-[#0F0F0F] border border-white/10 w-full max-sm p-8 rounded-3xl relative transform -translate-y-10 transition-transform duration-500 shadow-[0_30px_60px_rgba(0,0,0,0.9)]">
                 <nav class="flex flex-col gap-8 text-left">
                     <a href="/" class="flex items-center gap-4 text-2xl font-bold text-white hover:text-accent transition-colors group"><i data-lucide="home" class="w-6 h-6 text-accent/50 group-hover:text-accent"></i> Home</a>
-                    <a href="lavori.html" class="flex items-center gap-4 text-2xl font-bold text-white hover:text-accent transition-colors group"><i data-lucide="folder-kanban" class="w-6 h-6 text-accent/50 group-hover:text-accent"></i> Lavori</a>
+                    <a href="/lavori.html" class="flex items-center gap-4 text-2xl font-bold text-white hover:text-accent transition-colors group"><i data-lucide="folder-kanban" class="w-6 h-6 text-accent/50 group-hover:text-accent"></i> Lavori</a>
                     <a href="/#servizi" onclick="toggleMobileMenu()" class="flex items-center gap-4 text-2xl font-bold text-white hover:text-accent transition-colors group"><i data-lucide="layers" class="w-6 h-6 text-accent/50 group-hover:text-accent"></i> Servizi</a>
+                    <!-- Nuovo Tasto Toolbox Mobile -->
+                    <a href="/toolbox.html" class="flex items-center gap-4 text-2xl font-bold text-white hover:text-accent transition-colors group"><i data-lucide="package" class="w-6 h-6 text-accent/50 group-hover:text-accent"></i> Toolbox</a>
                 </nav>
             </div>
         </div>
@@ -119,7 +126,7 @@
                 <p class="text-base md:text-xl text-graytext mb-12 md:mb-12 max-w-3xl mx-auto reveal font-light leading-relaxed drop-shadow-md px-4">Affianco brand e creator nella loro comunicazione online. Non mi limito a girare e montare: studio la strategia visiva più adatta per farti raggiungere il tuo pubblico, aumentare la tua visibilità e valorizzare concretamente ciò che offri.</p>
                 
                 <div class="reveal mb-20 md:mb-16">
-                    <a href="lavori.html" class="inline-flex items-center gap-2 bg-accent hover:bg-accentHover text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105">Guarda i miei lavori <i data-lucide="arrow-right" class="w-5 h-5"></i></a>
+                    <a href="/lavori.html" class="inline-flex items-center gap-2 bg-accent hover:bg-accentHover text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105">Guarda i miei lavori <i data-lucide="arrow-right" class="w-5 h-5"></i></a>
                 </div>
 
                 <div class="flex flex-col items-center gap-3 reveal immediate-show opacity-60 w-full md:absolute md:bottom-12 md:inset-x-0 md:flex md:flex-col md:items-center">
@@ -129,22 +136,12 @@
             </div>
         </section>
 
+        <!-- Sezione Trust e Metodo rimangono invariate per pulizia -->
         <section class="py-12 md:py-24 border-y border-white/5 bg-white/[0.01] relative" id="trust">
             <div class="max-w-7xl mx-auto px-6 relative">
                 <p class="text-center text-base md:text-xl font-bold text-white uppercase tracking-widest mb-10 md:mb-16 reveal">Brand, aziende e creator che hanno <span class="text-accent">scelto me</span></p>
                 
                 <div class="relative group reveal mb-12 md:mb-20 px-2">
-                    <div class="absolute -left-2 md:-left-6 top-1/2 -translate-y-1/2 z-20 flex md:hidden">
-                        <button onclick="scrollCarousel('trust-carousel', -1)" class="carousel-btn w-12 h-12 rounded-full flex items-center justify-center shadow-lg active:scale-95">
-                            <i data-lucide="chevron-left" class="w-6 h-6"></i>
-                        </button>
-                    </div>
-                    <div class="absolute -right-2 md:-right-6 top-1/2 -translate-y-1/2 z-20 flex md:hidden">
-                        <button onclick="scrollCarousel('trust-carousel', 1)" class="carousel-btn w-12 h-12 rounded-full flex items-center justify-center shadow-lg active:scale-95">
-                            <i data-lucide="chevron-right" class="w-6 h-6"></i>
-                        </button>
-                    </div>
-
                     <div id="trust-carousel" class="flex md:flex-wrap justify-start md:justify-center items-center gap-4 md:gap-6 overflow-x-auto md:overflow-visible no-scrollbar snap-x snap-mandatory px-4">
                         <div class="logo-item snap-center shrink-0 w-[calc((100vw-100px)/3)] md:w-36 aspect-square"><a href="https://listhen.it/" target="_blank" class="glass-card flex items-center justify-center p-2 w-full h-full rounded-xl overflow-hidden shadow-sm"><img src="https://i.ibb.co/Fq6Zjkcs/5fc678930737a300019b2dc9-198x149-1x.jpg" alt="Logo" class="w-full h-full object-cover rounded-lg"></a></div>
                         <div class="logo-item snap-center shrink-0 w-[calc((100vw-100px)/3)] md:w-36 aspect-square"><a href="https://www.instagram.com/gl_personalcoaching" target="_blank" class="glass-card flex items-center justify-center p-2 w-full h-full rounded-xl overflow-hidden shadow-sm"><img src="https://i.ibb.co/FLPmYXfb/489281375-1028214965952045-1239755772869026008-n.jpg" alt="Logo" class="w-full h-full object-cover rounded-lg"></a></div>
@@ -153,11 +150,6 @@
                         <div class="logo-item snap-center shrink-0 w-[calc((100vw-100px)/3)] md:w-36 aspect-square"><a href="https://www.youtube.com/@microfonodelcestista" target="_blank" class="glass-card flex items-center justify-center p-2 w-full h-full rounded-xl overflow-hidden shadow-sm"><img src="https://i.ibb.co/S4YwfpPJ/551969315-18061557443526725-7935004091035072684-n.jpg" alt="Logo" class="w-full h-full object-cover rounded-lg"></a></div>
                         <div class="logo-item snap-center shrink-0 w-[calc((100vw-100px)/3)] md:w-36 aspect-square"><a href="https://www.instagram.com/allylabkids" target="_blank" class="glass-card flex items-center justify-center p-2 w-full h-full rounded-xl overflow-hidden shadow-sm"><img src="https://i.ibb.co/C59rk2dY/626271930-18557913100017226-2595093498704943689-n.jpg" alt="Logo" class="w-full h-full object-cover rounded-lg"></a></div>
                     </div>
-                </div>
-
-                <div class="flex flex-col items-center gap-2 reveal opacity-60 w-full mt-8">
-                    <span class="text-[10px] uppercase tracking-[0.3em] text-graytext font-semibold mb-1">Esplora</span>
-                    <i data-lucide="chevron-down" class="w-6 h-6 text-accent scroll-arrow-anim"></i>
                 </div>
             </div>
         </section>
@@ -168,11 +160,6 @@
                 <div class="glass-card p-6 md:p-12 rounded-3xl reveal mb-12 md:mb-20 text-left">
                     <p class="text-base md:text-xl text-gray-300 leading-relaxed mb-6 font-light">Ciao, sono Teo, videomaker specializzato in content marketing. Ho imparato questo mestiere nell'unico modo che conta davvero: facendolo. Ore passate a studiare format, dinamiche social e tecniche di montaggio per capire esattamente come si trasforma l'attenzione di un utente in un'azione concreta.</p>
                     <p class="text-base md:text-xl text-gray-300 leading-relaxed font-light">Il mio lavoro è tradurre questa pratica in risultati per il tuo business. Che tu voglia posizionare il tuo brand, vendere un prodotto o far crescere la tua community, sviluppo i video e la strategia per farti raggiungere l'obiettivo.</p>
-                </div>
-
-                <div class="flex flex-col items-center gap-2 reveal opacity-60 w-full">
-                    <span class="text-[10px] uppercase tracking-[0.3em] text-graytext font-semibold mb-1">Esplora</span>
-                    <i data-lucide="chevron-down" class="w-6 h-6 text-accent scroll-arrow-anim"></i>
                 </div>
             </div>
         </section>
@@ -210,17 +197,19 @@
         </p>
         <div class="px-6">
             <p class="text-[9px] md:text-[10px] text-white/20 max-w-3xl mx-auto leading-relaxed uppercase tracking-widest">
-                Tutti i diritti riservati. Ogni contenuto visivo, testuale e il codice sorgente di questo sito sono di proprietà esclusiva dell'autore. Ne è vietata la riproduzione, la distribuzione e l'utilizzo non autorizzato, anche parziale, senza esplicito consenso scritto.
+                TUTTI I DIRITTI RISERVATI. OGNI CONTENUTO VISIVO, TESTUALE E IL CODICE SORGENTE DI QUESTO SITO SONO DI PROPRIETÀ ESCLUSIVA DELL'AUTORE. NE È VIETATA LA RIPRODUZIONE, LA DISTRIBUZIONE E L'UTILIZZO NON AUTORIZZATO, ANCHE PARZIALE, SENZA ESPLICITO CONSENSO SCRITTO.
             </p>
         </div>
     </footer>
 </div> 
 
+    <!-- Pillola Chat -->
     <button id="chat-pill" onclick="toggleContactModal()" class="chat-button shadow-2xl">
         <i data-lucide="message-square" class="w-7 h-7 shrink-0"></i>
         <span id="chat-text">Parliamo del tuo progetto?</span>
     </button>
 
+    <!-- Modal Contatti -->
     <div id="contactModal" class="fixed inset-0 z-[140] flex items-center justify-center px-4 opacity-0 pointer-events-none transition-opacity duration-300">
         <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="toggleContactModal()"></div>
         <div class="glass-modal w-full max-w-md p-8 rounded-3xl relative transform translate-y-10 transition-transform duration-500 shadow-2xl" id="contactModalContent">
@@ -249,12 +238,6 @@
 
     <script>
         lucide.createIcons();
-
-        function scrollCarousel(id, direction) {
-            const carousel = document.getElementById(id);
-            const scrollAmount = carousel.offsetWidth * 0.8;
-            carousel.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
-        }
 
         function toggleMobileMenu() {
             const menu = document.getElementById('mobileMenu');
