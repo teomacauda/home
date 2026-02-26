@@ -109,8 +109,9 @@
                 <a href="/toolbox.html" class="nav-link active">Toolbox</a>
             </nav>
 
-            <button onclick="toggleMobileMenu()" class="md:hidden text-graytext p-2 transition-colors hover:text-white">
-                <i data-lucide="menu"></i>
+            <button onclick="toggleMobileMenu()" class="md:hidden text-graytext p-2 transition-colors hover:text-white focus:outline-none relative z-[120]">
+                <i data-lucide="menu" id="icon-menu" class="w-7 h-7 block"></i>
+                <i data-lucide="x" id="icon-x" class="w-7 h-7 hidden"></i>
             </button>
         </div>
 
@@ -118,11 +119,19 @@
         <div id="mobileMenu" class="fixed inset-0 z-[110] flex items-start justify-center px-6 pt-24 opacity-0 pointer-events-none transition-all duration-300 md:hidden">
             <div class="absolute inset-0 bg-black/90 backdrop-blur-xl" onclick="toggleMobileMenu()"></div>
             <div id="mobileMenuContent" class="bg-[#0F0F0F] border border-white/10 w-full p-8 rounded-3xl relative transform -translate-y-10 transition-transform duration-500">
-                <nav class="flex flex-col gap-6 text-left">
-                    <a href="/" class="text-2xl font-bold text-white">Home</a>
-                    <a href="/lavori.html" class="text-2xl font-bold text-white">Lavori</a>
-                    <a href="/#servizi" class="text-2xl font-bold text-white">Servizi</a>
-                    <a href="/toolbox.html" class="text-2xl font-bold text-accent">Toolbox</a>
+                <nav class="flex flex-col gap-8 text-left">
+                    <a href="/" class="flex items-center gap-4 text-2xl font-bold text-white hover:text-accent transition-colors group">
+                        <i data-lucide="home" class="w-6 h-6 text-accent/50 group-hover:text-accent"></i> Home
+                    </a>
+                    <a href="/lavori.html" class="flex items-center gap-4 text-2xl font-bold text-white hover:text-accent transition-colors group">
+                        <i data-lucide="folder-kanban" class="w-6 h-6 text-accent/50 group-hover:text-accent"></i> Lavori
+                    </a>
+                    <a href="/#servizi" onclick="toggleMobileMenu()" class="flex items-center gap-4 text-2xl font-bold text-white hover:text-accent transition-colors group">
+                        <i data-lucide="layers" class="w-6 h-6 text-accent/50 group-hover:text-accent"></i> Servizi
+                    </a>
+                    <a href="/toolbox.html" class="flex items-center gap-4 text-2xl font-bold text-accent transition-colors group">
+                        <i data-lucide="package" class="w-6 h-6 text-accent group-hover:text-accent"></i> Toolbox
+                    </a>
                 </nav>
             </div>
         </div>
@@ -191,18 +200,26 @@
     function toggleMobileMenu() {
         const menu = document.getElementById('mobileMenu');
         const content = document.getElementById('mobileMenuContent');
+        const iconMenu = document.getElementById('icon-menu');
+        const iconX = document.getElementById('icon-x');
         const isOpen = menu.classList.contains('opacity-100');
         
         if (!isOpen) {
             menu.classList.remove('opacity-0', 'pointer-events-none');
             menu.classList.add('opacity-100', 'pointer-events-auto');
-            content.classList.replace('-translate-y-10', 'translate-y-0');
+            content.classList.remove('-translate-y-10');
+            content.classList.add('translate-y-0');
             document.body.style.overflow = 'hidden';
+            if(iconMenu) iconMenu.classList.add('hidden');
+            if(iconX) iconX.classList.remove('hidden');
         } else {
             menu.classList.add('opacity-0', 'pointer-events-none');
             menu.classList.remove('opacity-100', 'pointer-events-auto');
-            content.classList.replace('translate-y-0', '-translate-y-10');
+            content.classList.remove('translate-y-0');
+            content.classList.add('-translate-y-10');
             document.body.style.overflow = '';
+            if(iconX) iconX.classList.add('hidden');
+            if(iconMenu) iconMenu.classList.remove('hidden');
         }
     }
 
