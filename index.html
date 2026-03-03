@@ -35,8 +35,20 @@
         .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease; backface-visibility: hidden; transform-style: preserve-3d; }
         .glass-card:hover { transform: translateY(-8px); border-color: rgba(255, 122, 0, 0.3); box-shadow: 0 20px 40px -10px rgba(255, 122, 0, 0.1); }
         .glass-modal { background: rgba(15, 15, 15, 0.85); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); }
-        .ambient-glow { position: absolute; width: 200%; max-width: 1000px; aspect-ratio: 1/1; background: radial-gradient(circle, rgba(255,122,0,0.3) 0%, rgba(0,0,0,0) 70%); top: -20vh; left: 50%; transform: translateX(-50%); z-index: 0; pointer-events: none; }
-        .camera-bg-container { position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); width: 130%; max-width: 1100px; opacity: 0.35; z-index: 0; pointer-events: none; }
+        
+        /* Gradiente: Semicerchio superiore saturo */
+        .ambient-glow { 
+            position: absolute; 
+            width: 100%; 
+            height: 700px; 
+            background: radial-gradient(ellipse at 50% 0%, rgba(255, 122, 0, 0.45) 0%, rgba(255, 122, 0, 0.1) 40%, rgba(0, 0, 0, 0) 85%); 
+            top: 0; 
+            left: 0; 
+            z-index: 0; 
+            pointer-events: none; 
+        }
+
+        .camera-bg-container { position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); width: 130%; max-width: 1100px; opacity: 0; z-index: 0; pointer-events: none; }
         @media (min-width: 768px) { .camera-bg-container { width: 85%; top: 50%; } }
         main, footer { position: relative; z-index: 10; }
         .reveal { opacity: 0; transform: translateY(50px); will-change: transform, opacity; }
@@ -82,7 +94,6 @@
             <nav class="hidden md:flex gap-4 text-sm font-medium text-graytext">
                 <a href="/lavori.html" class="px-5 py-2.5 rounded-full border border-accent hover:border-accent/30 hover:bg-accent/10 hover:text-white transition-all duration-300">Lavori</a>
                 <a href="/#servizi" class="px-5 py-2.5 rounded-full border border-accent hover:border-accent/30 hover:bg-accent/10 hover:text-white transition-all duration-300">Servizi</a>
-                <!-- Nuovo Tasto Toolbox -->
                 <a href="/toolbox.html" class="px-5 py-2.5 rounded-full border border-accent hover:border-accent/30 hover:bg-accent/10 hover:text-white transition-all duration-300">Toolbox</a>
             </nav>
 
@@ -92,7 +103,6 @@
             </button>
         </div>
 
-        <!-- Mobile Menu -->
         <div id="mobileMenu" class="fixed inset-0 z-[110] flex items-start justify-center px-6 pt-24 opacity-0 pointer-events-none transition-all duration-300">
             <div class="absolute inset-0 bg-black/85 backdrop-blur-2xl" onclick="toggleMobileMenu()"></div>
             <div id="mobileMenuContent" class="bg-[#0F0F0F] border border-white/10 w-full max-sm p-8 rounded-3xl relative transform -translate-y-10 transition-transform duration-500 shadow-[0_30px_60px_rgba(0,0,0,0.9)]">
@@ -100,7 +110,6 @@
                     <a href="/" class="flex items-center gap-4 text-2xl font-bold text-white hover:text-accent transition-colors group"><i data-lucide="home" class="w-6 h-6 text-accent/50 group-hover:text-accent"></i> Home</a>
                     <a href="/lavori.html" class="flex items-center gap-4 text-2xl font-bold text-white hover:text-accent transition-colors group"><i data-lucide="folder-kanban" class="w-6 h-6 text-accent/50 group-hover:text-accent"></i> Lavori</a>
                     <a href="/#servizi" onclick="toggleMobileMenu()" class="flex items-center gap-4 text-2xl font-bold text-white hover:text-accent transition-colors group"><i data-lucide="layers" class="w-6 h-6 text-accent/50 group-hover:text-accent"></i> Servizi</a>
-                    <!-- Nuovo Tasto Toolbox Mobile -->
                     <a href="/toolbox.html" class="flex items-center gap-4 text-2xl font-bold text-white hover:text-accent transition-colors group"><i data-lucide="package" class="w-6 h-6 text-accent/50 group-hover:text-accent"></i> Toolbox</a>
                 </nav>
             </div>
@@ -136,14 +145,12 @@
             </div>
         </section>
 
-        <!-- Sezione Trust e Metodo rimangono invariate per pulizia -->
         <section class="py-12 md:py-24 border-y border-white/5 bg-white/[0.01] relative" id="trust">
             <div class="max-w-7xl mx-auto px-6 relative">
                 <p class="text-center text-base md:text-xl font-bold text-white uppercase tracking-widest mb-10 md:mb-16 reveal">Brand, aziende e creator che hanno <span class="text-accent">scelto me</span></p>
                 
                 <div class="relative group reveal mb-12 md:mb-20 px-2 overflow-hidden md:overflow-visible">
                     
-                    <!-- Frecce indicatrici scroll mobile -->
                     <div id="trust-scroll-left" class="absolute left-0 top-0 bottom-0 w-12 md:w-16 bg-gradient-to-r from-black via-black/80 to-transparent z-10 flex items-center justify-start pl-1 md:hidden pointer-events-none opacity-0 transition-opacity duration-300">
                         <i data-lucide="chevron-left" class="w-8 h-8 text-white/70"></i>
                     </div>
@@ -212,13 +219,11 @@
     </footer>
 </div> 
 
-    <!-- Pillola Chat -->
     <button id="chat-pill" onclick="toggleContactModal()" class="chat-button shadow-2xl">
         <i data-lucide="message-square" class="w-7 h-7 shrink-0"></i>
         <span id="chat-text">Parliamo del tuo progetto?</span>
     </button>
 
-    <!-- Modal Contatti -->
     <div id="contactModal" class="fixed inset-0 z-[140] flex items-center justify-center px-4 opacity-0 pointer-events-none transition-opacity duration-300">
         <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="toggleContactModal()"></div>
         <div class="glass-modal w-full max-w-md p-8 rounded-3xl relative transform translate-y-10 transition-transform duration-500 shadow-2xl" id="contactModalContent">
@@ -330,28 +335,48 @@
             });
         }
 
-        function initCameraScroll() {
+        function initCameraAnimation() {
             if (typeof gsap === 'undefined' || !document.getElementById("hero-section")) return;
-            const tl = gsap.timeline({
+
+            // 1. Ingresso: La fotocamera si scompone all'apertura
+            const entranceTl = gsap.timeline({
+                defaults: { duration: 2.2, ease: "power3.inOut" }
+            });
+
+            gsap.set("#camera-container", { opacity: 0 });
+            gsap.set(["#cam-body", "#cam-grip", "#cam-viewfinder", "#cam-lens-back", "#cam-lens-mid", "#cam-lens-front", "#cam-rec"], { x: 0, y: 0, scale: 1 });
+
+            entranceTl.to("#camera-container", { opacity: 0.35, duration: 1.2 }, 0)
+                .to("#cam-body", { y: 120 }, 0)
+                .to("#cam-grip", { x: 100 }, 0)
+                .to("#cam-viewfinder", { y: -100, x: -50 }, 0)
+                .to("#cam-lens-back", { x: -120, scale: 0.7 }, 0)
+                .to("#cam-lens-mid", { x: 120, scale: 1.2 }, 0)
+                .to("#cam-lens-front", { y: 150, scale: 1.6 }, 0)
+                .to("#cam-rec", { y: -150 }, 0);
+
+            // 2. Scroll: Chiusura QUASI ISTANTANEA (entro 150px)
+            const scrollTl = gsap.timeline({
                 scrollTrigger: {
                     trigger: "#hero-section", 
                     start: "top top", 
-                    end: "bottom top", 
-                    scrub: 1.5, 
+                    end: "+=150", // Molto più breve: si chiude quasi subito
+                    scrub: 0.8, 
                 }
             });
-            tl.fromTo("#cam-body", { y: 200 }, { y: 0, duration: 0.5 }, 0)
-              .fromTo("#cam-grip", { x: 150 }, { x: 0, duration: 0.5 }, 0)
-              .fromTo("#cam-viewfinder", { y: -150, x: -80 }, { y: 0, x: 0, duration: 0.5 }, 0)
-              .fromTo("#cam-lens-back", { x: -200, scale: 0.6 }, { x: 0, scale: 1, duration: 0.5 }, 0)
-              .fromTo("#cam-lens-mid", { x: 200, scale: 1.4 }, { x: 0, scale: 1, duration: 0.5 }, 0)
-              .fromTo("#cam-lens-front", { y: 200, scale: 1.8 }, { y: 0, scale: 1, duration: 0.5 }, 0)
-              .fromTo("#cam-rec", { y: -200 }, { y: 0, duration: 0.5 }, 0);
-            tl.to({}, { duration: 3 });
-            tl.to("#camera-container", { opacity: 0, y: -50, duration: 1 });
+
+            // Ricomposizione rapida
+            scrollTl.to(["#cam-body", "#cam-grip", "#cam-viewfinder", "#cam-lens-back", "#cam-lens-mid", "#cam-lens-front", "#cam-rec"], { 
+                x: 0, 
+                y: 0, 
+                scale: 1, 
+                duration: 1,
+                ease: "power2.out"
+            }, 0);
+            
+            // LA FOTOCAMERA RESTA LÌ: Non aggiungiamo opacità 0
         }
 
-        // --- FUNZIONE PER L'EFFETTO "SIPARIO" SOLO DA DESKTOP ---
         function initDesktopPinAnimation() {
             if (typeof gsap === 'undefined') return;
 
@@ -405,17 +430,13 @@
             });
         }
 
-        // --- NUOVA FUNZIONE PER INDICATORI SCROLL SU MOBILE ---
         function initMobileCarouselIndicators() {
             const trustCarousel = document.getElementById('trust-carousel');
             const scrollLeftIndicator = document.getElementById('trust-scroll-left');
             const scrollRightIndicator = document.getElementById('trust-scroll-right');
 
             if (trustCarousel && scrollLeftIndicator && scrollRightIndicator) {
-                // Aggiungiamo un listener allo scroll del carosello
                 trustCarousel.addEventListener('scroll', () => {
-                    
-                    // Gestione freccia sinistra (compare se ho scrollato un po')
                     if (trustCarousel.scrollLeft > 10) {
                         scrollLeftIndicator.classList.remove('opacity-0');
                         scrollLeftIndicator.classList.add('opacity-100');
@@ -424,7 +445,6 @@
                         scrollLeftIndicator.classList.add('opacity-0');
                     }
 
-                    // Gestione freccia destra (scompare se sono arrivato alla fine)
                     if (trustCarousel.scrollLeft >= (trustCarousel.scrollWidth - trustCarousel.clientWidth - 10)) {
                         scrollRightIndicator.classList.remove('opacity-100');
                         scrollRightIndicator.classList.add('opacity-0');
@@ -438,9 +458,9 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             initScrollAnimations();
-            initCameraScroll();
+            initCameraAnimation(); 
             initDesktopPinAnimation(); 
-            initMobileCarouselIndicators(); // <-- Richiamo la nuova funzione qua!
+            initMobileCarouselIndicators(); 
             
             const pill = document.getElementById('chat-pill');
             if(pill) {
