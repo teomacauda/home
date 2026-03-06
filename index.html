@@ -478,21 +478,40 @@
         });
     </script>
 
-    <script>
-        window.addEventListener('load', function() {
-            if (window.location.hash) {
-                const targetId = window.location.hash.substring(1);
-                const targetElement = document.getElementById(targetId);
-                
-                if (targetElement) {
-                    // Ritardo leggero per permettere al browser di finire il layout
-                    setTimeout(() => {
-                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }, 300);
-                }
+   <script>
+    window.addEventListener('load', function() {
+        // Se c'è un'ancora nell'URL (es. #servizi)
+        if (window.location.hash) {
+            const targetId = window.location.hash.substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            // 1. PULIZIA URL: Rimuove "index.html" dalla barra degli indirizzi
+            // così l'utente vede un URL pulito anche se il link originale era "brutto"
+            if (window.location.pathname.includes('index.html')) {
+                const newUrl = window.location.origin + '/' + window.location.hash;
+                window.history.replaceState(null, '', newUrl);
             }
-        });
-    </script>
+
+            // 2. FORZA SCROLL CON OFFSET
+            if (targetElement) {
+                setTimeout(() => {
+                    // Calcola l'altezza della navbar per non finire sotto
+                    const nav = document.getElementById('navbar');
+                    const navHeight = nav ? nav.offsetHeight : 80; // 80px di fallback
+                    
+                    // Calcolo preciso della posizione
+                    const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+                    const offsetPosition = elementPosition - navHeight;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }, 400); // 400ms di ritardo per dare tempo a GSAP e immagini
+            }
+        }
+    });
+</script>
     
 </body>
 </html>
