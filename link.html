@@ -23,21 +23,31 @@
             theme: {
                 extend: {
                     fontFamily: { sans: ['Inter', 'sans-serif'], },
-                    colors: { dark: '#000000', accent: '#FF7A00', accentHover: '#E56D00', graytext: '#AAAAAA', }
+                    colors: { 
+                        dark: '#000000', 
+                        accent: '#FF7A00', 
+                        accentHover: '#E56D00', 
+                        graytext: '#AAAAAA', 
+                    }
                 }
             }
         }
     </script>
 
     <style>
-        body { background-color: #000000; color: #ffffff; overflow-x: hidden; font-family: 'Inter', sans-serif; }
+        body { 
+            background-color: #000000; 
+            color: #ffffff; 
+            overflow-x: hidden; 
+            font-family: 'Inter', sans-serif; 
+        }
         
-        /* Gradiente ambientale */
+        /* Gradiente ambientale di sfondo */
         .ambient-glow { 
             position: fixed; 
             width: 100%; 
             height: 100vh; 
-            background: radial-gradient(circle at 50% -20%, rgba(255, 122, 0, 0.25) 0%, rgba(0, 0, 0, 0) 70%); 
+            background: radial-gradient(circle at 50% -10%, rgba(255, 122, 0, 0.15) 0%, rgba(0, 0, 0, 0) 80%); 
             top: 0; left: 0; z-index: 0; pointer-events: none; 
         }
 
@@ -47,23 +57,43 @@
             backdrop-filter: blur(12px); 
             -webkit-backdrop-filter: blur(12px); 
             border: 1px solid rgba(255, 255, 255, 0.08); 
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .glass-button:hover { 
-            background: rgba(255, 122, 0, 0.08); 
-            border-color: rgba(255, 122, 0, 0.3); 
-            transform: scale(1.02);
+            background: rgba(255, 255, 255, 0.05); 
+            border-color: rgba(255, 255, 255, 0.15); 
+            transform: translateY(-2px);
         }
         .glass-button:active { transform: scale(0.98); }
+
+        /* Pulsazione Magnetica per il Portfolio */
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0 rgba(255, 122, 0, 0.3); border-color: rgba(255, 122, 0, 0.2); }
+            50% { box-shadow: 0 0 20px 2px rgba(255, 122, 0, 0.15); border-color: rgba(255, 122, 0, 0.6); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 122, 0, 0.3); border-color: rgba(255, 122, 0, 0.2); }
+        }
+
+        .pulse-featured {
+            animation: pulse-glow 2.5s infinite ease-in-out;
+            background: rgba(255, 122, 0, 0.04) !important;
+            border: 1px solid rgba(255, 122, 0, 0.3) !important;
+        }
+        .pulse-featured:hover {
+            background: rgba(255, 122, 0, 0.08) !important;
+            border-color: rgba(255, 122, 0, 0.8) !important;
+        }
 
         .profile-border {
             position: relative;
             padding: 3px;
-            background: linear-gradient(to bottom, #FF7A00, #000000);
+            background: linear-gradient(to bottom, #FF7A00, #331a00);
             border-radius: 9999px;
         }
 
-        .reveal { opacity: 0; transform: translateY(20px); }
+        .reveal { opacity: 0; transform: translateY(15px); }
+        
+        /* Nascondi scrollbar */
+        ::-webkit-scrollbar { width: 0px; background: transparent; }
     </style>
 </head>
 <body class="antialiased">
@@ -71,110 +101,104 @@
     <div class="ambient-glow"></div>
 
     <!-- Main Container -->
-    <main class="relative z-10 w-full max-w-md mx-auto px-6 pt-6 md:pt-10 pb-16 flex flex-col items-center min-h-screen">
+    <main class="relative z-10 w-full max-w-md mx-auto px-6 pt-8 md:pt-12 pb-16 flex flex-col items-center min-h-screen">
         
-        <!-- Header con Logo in alto a sinistra -->
-        <header class="w-full flex justify-start items-center mb-8 md:mb-12 reveal">
-            <a href="/" class="w-10 md:w-12 h-auto opacity-90 hover:opacity-100 transition-opacity">
-                <svg viewBox="0 0 1018 723" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1017.46,153.167L1017.42,569.5L865.335,496.583L865.335,722.792L539.502,722.667L575.919,653.667L796.127,653.667L796.127,69.25L616.835,69.25L432.669,425.125L248.502,69.25L69.21,69.25L69.21,653.667L289.502,653.667L325.96,722.792L0.002,722.792L0.002,-0L289.502,-0L432.669,275.375L575.835,-0L865.335,-0L865.335,226.083L1017.46,153.167Z" style="fill:white;fill-rule:nonzero;"/>
-                    <path d="M657.833,584.167L657.833,287.083L432.667,722.792L207.5,287.042L207.5,584.167L138.417,584.167L138.417,138.458L207.5,138.458L432.667,574.708L657.833,138.458L726.917,138.458L726.917,584.167L657.833,584.167Z" style="fill:white;fill-rule:nonzero;"/>
+        <!-- Logo Header -->
+        <header class="w-full flex justify-start items-center mb-10 reveal">
+            <a href="/" class="w-10 h-auto opacity-80 hover:opacity-100 transition-opacity">
+                <svg viewBox="0 0 1018 723" fill="white" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1017.46,153.167L1017.42,569.5L865.335,496.583L865.335,722.792L539.502,722.667L575.919,653.667L796.127,653.667L796.127,69.25L616.835,69.25L432.669,425.125L248.502,69.25L69.21,69.25L69.21,653.667L289.502,653.667L325.96,722.792L0.002,722.792L0.002,-0L289.502,-0L432.669,275.375L575.835,-0L865.335,-0L865.335,226.083L1017.46,153.167Z"/>
+                    <path d="M657.833,584.167L657.833,287.083L432.667,722.792L207.5,287.042L207.5,584.167L138.417,584.167L138.417,138.458L207.5,138.458L432.667,574.708L657.833,138.458L726.917,138.458L726.917,584.167L657.833,584.167Z"/>
                 </svg>
             </a>
         </header>
 
         <!-- Profile Section -->
-        <div class="flex flex-col items-center mb-8 md:mb-10 text-center reveal">
-            <div class="profile-border mb-4">
-                <div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-dark overflow-hidden border-2 border-black">
-                    <!-- SPAZIO PER IMMAGINE PROFILO: Inserisci il link alla tua foto qui -->
+        <div class="flex flex-col items-center mb-10 text-center reveal">
+            <div class="profile-border mb-5 shadow-2xl shadow-accent/10">
+                <div class="w-24 h-24 rounded-full bg-dark overflow-hidden border-2 border-black">
                     <img src="https://cdn.statically.io/gh/teomacauda/cdn-assets/main/immagineprofilo.webp" 
                          alt="Teo Macauda" 
                          class="w-full h-full object-cover">
                 </div>
             </div>
-            <h1 class="text-xl md:text-2xl font-extrabold tracking-tight">Teo Macauda</h1>
-            <p class="text-accent text-xs md:text-sm font-semibold tracking-wide">Videomaker & Content Marketing</p>
-            <p class="text-graytext text-[11px] md:text-xs mt-3 max-w-[260px] md:max-w-[280px] font-light leading-relaxed">
-                Affianco brand e creator nella loro comunicazione online tramite video!
+            <h1 class="text-2xl font-extrabold tracking-tight mb-1">Teo Macauda</h1>
+            <p class="text-accent text-sm font-bold tracking-widest uppercase">Videomaker & Content Marketing</p>
+            <p class="text-graytext text-xs mt-4 max-w-[280px] font-medium leading-relaxed opacity-80">
+                Trasformo le tue idee in contenuti video concreti. Ottimizzazione, strategia e alta qualità.
             </p>
         </div>
 
         <!-- Links Stack -->
-        <div class="w-full space-y-3 md:space-y-4 reveal">
+        <div class="w-full space-y-4 reveal">
             
-            <!-- Link: Sito Ufficiale -->
-            <a href="/" class="glass-button w-full p-3 md:p-4 rounded-2xl flex items-center justify-between group">
-                <div class="flex items-center gap-3 md:gap-4">
-                    <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-accent/20 flex items-center justify-center text-accent shrink-0">
-                        <i data-lucide="globe" class="w-4 h-4 md:w-5 md:h-5"></i>
+            <!-- Link: Portfolio (EVIDENZIATO) -->
+            <a href="/" class="glass-button pulse-featured w-full p-4 rounded-2xl flex items-center justify-between group">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-accent/20 flex items-center justify-center text-accent shrink-0">
+                        <!-- Icona Mondo per il sito -->
+                        <i data-lucide="globe" class="w-5 h-5"></i>
                     </div>
-                    <span class="text-sm md:text-base font-semibold text-white tracking-wide">Guarda i miei lavori</span>
+                    <div class="flex flex-col items-start">
+                        <span class="text-base font-bold text-white tracking-wide">Visita il mio sito</span>
+                        <span class="text-[10px] text-accent font-bold uppercase tracking-widest">Portfolio</span>
+                    </div>
                 </div>
-                <i data-lucide="arrow-right" class="w-4 h-4 text-graytext group-hover:text-accent group-hover:translate-x-1 transition-all"></i>
+                <i data-lucide="chevron-right" class="w-5 h-5 text-accent group-hover:translate-x-1 transition-all"></i>
             </a>
 
             <!-- Link: WhatsApp -->
-            <a href="https://wa.me/message/KBRZEPY2IJFTA1" target="_blank" class="glass-button w-full p-3 md:p-4 rounded-2xl flex items-center justify-between group">
-                <div class="flex items-center gap-3 md:gap-4">
-                    <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-green-500/10 flex items-center justify-center text-green-500 shrink-0">
-                        <i data-lucide="message-circle" class="w-4 h-4 md:w-5 md:h-5"></i>
+            <a href="https://wa.me/message/KBRZEPY2IJFTA1" target="_blank" class="glass-button w-full p-4 rounded-2xl flex items-center justify-between group">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center text-green-500 shrink-0">
+                        <!-- Icona WhatsApp originale con cornetta -->
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                        </svg>
                     </div>
-                    <span class="text-sm md:text-base font-semibold text-white tracking-wide">Contattami su whatsapp</span>
+                    <span class="text-base font-semibold text-white tracking-wide">Parliamo del tuo progetto</span>
                 </div>
-                <i data-lucide="arrow-right" class="w-4 h-4 text-graytext group-hover:text-green-500 group-hover:translate-x-1 transition-all"></i>
+                <i data-lucide="chevron-right" class="w-5 h-5 text-graytext group-hover:text-green-500 group-hover:translate-x-1 transition-all"></i>
             </a>
 
             <!-- Link: Email -->
-            <a href="mailto:matteomacaudaprod@gmail.com" class="glass-button w-full p-3 md:p-4 rounded-2xl flex items-center justify-between group">
-                <div class="flex items-center gap-3 md:gap-4">
-                    <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-500 shrink-0">
-                        <i data-lucide="mail" class="w-4 h-4 md:w-5 md:h-5"></i>
+            <a href="mailto:matteomacaudaprod@gmail.com" class="glass-button w-full p-4 rounded-2xl flex items-center justify-between group">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 shrink-0">
+                        <i data-lucide="mail" class="w-5 h-5"></i>
                     </div>
-                    <span class="text-sm md:text-base font-semibold text-white tracking-wide">Inviami un email</span>
+                    <span class="text-base font-semibold text-white tracking-wide">Richiedi un preventivo</span>
                 </div>
-                <i data-lucide="arrow-right" class="w-4 h-4 text-graytext group-hover:text-blue-500 group-hover:translate-x-1 transition-all"></i>
-            </a>
-
-            <!-- Link: Instagram -->
-            <a href="https://instagram.com/teo.macauda" target="_blank" class="glass-button w-full p-3 md:p-4 rounded-2xl flex items-center justify-between group">
-                <div class="flex items-center gap-3 md:gap-4">
-                    <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400 shrink-0">
-                        <i data-lucide="instagram" class="w-4 h-4 md:w-5 md:h-5"></i>
-                    </div>
-                    <span class="text-sm md:text-base font-semibold text-white tracking-wide">Seguimi su instagram</span>
-                </div>
-                <i data-lucide="arrow-right" class="w-4 h-4 text-graytext group-hover:text-purple-400 group-hover:translate-x-1 transition-all"></i>
+                <i data-lucide="chevron-right" class="w-5 h-5 text-graytext group-hover:text-blue-400 group-hover:translate-x-1 transition-all"></i>
             </a>
 
         </div>
 
         <!-- Footer -->
-        <footer class="py-12 text-center border-t border-white/5 relative z-10">
-        <p class="text-graytext text-sm mb-4">
-            &copy; <script>document.write(new Date().getFullYear())</script> Matteo Maria Macauda. P.IVA 02153520891.
-        </p>
-        <div class="px-6">
-            <p class="text-[9px] md:text-[10px] text-white/20 max-w-3xl mx-auto leading-relaxed uppercase tracking-widest">
-                TUTTI I DIRITTI RISERVATI. NE È VIETATA LA RIPRODUZIONE SENZA ESPLICITO CONSENSO SCRITTO.
+        <footer class="mt-auto pt-16 pb-8 text-center w-full reveal">
+            <div class="h-[1px] w-12 bg-white/10 mx-auto mb-8"></div>
+            <p class="text-graytext text-[11px] font-medium mb-3 tracking-tight">
+                &copy; <script>document.write(new Date().getFullYear())</script> Matteo Maria Macauda • P.IVA 02153520891
             </p>
-        </div>
-    </footer>
+            <p class="text-[9px] text-white/20 uppercase tracking-[0.2em] leading-loose px-4">
+                Tutti i diritti riservati. Riproduzione vietata senza consenso.
+            </p>
+        </footer>
 
     </main>
 
     <script>
-        // Init Icons
+        // Inizializza le icone Lucide
         lucide.createIcons();
 
-        // Reveal Animations
+        // Animazione di ingresso con GSAP
         document.addEventListener('DOMContentLoaded', () => {
             gsap.to(".reveal", {
                 opacity: 1,
                 y: 0,
-                duration: 1.2,
-                stagger: 0.1,
-                ease: "power4.out"
+                duration: 1,
+                stagger: 0.15,
+                ease: "power3.out"
             });
         });
     </script>
