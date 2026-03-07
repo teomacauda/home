@@ -71,11 +71,11 @@
     <div class="ambient-glow"></div>
 
     <!-- Main Container -->
-    <main class="relative z-10 w-full max-w-md mx-auto px-6 pt-8 pb-20 flex flex-col items-center">
+    <main class="relative z-10 w-full max-w-md mx-auto px-6 pt-6 md:pt-10 pb-16 flex flex-col items-center min-h-screen">
         
         <!-- Header con Logo in alto a sinistra -->
-        <header class="w-full flex justify-start items-center mb-12 reveal">
-            <a href="/" class="w-12 h-auto opacity-90 hover:opacity-100 transition-opacity">
+        <header class="w-full flex justify-start items-center mb-8 md:mb-12 reveal">
+            <a href="/" class="w-10 md:w-12 h-auto opacity-90 hover:opacity-100 transition-opacity">
                 <svg viewBox="0 0 1018 723" version="1.1" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1017.46,153.167L1017.42,569.5L865.335,496.583L865.335,722.792L539.502,722.667L575.919,653.667L796.127,653.667L796.127,69.25L616.835,69.25L432.669,425.125L248.502,69.25L69.21,69.25L69.21,653.667L289.502,653.667L325.96,722.792L0.002,722.792L0.002,-0L289.502,-0L432.669,275.375L575.835,-0L865.335,-0L865.335,226.083L1017.46,153.167Z" style="fill:white;fill-rule:nonzero;"/>
                     <path d="M657.833,584.167L657.833,287.083L432.667,722.792L207.5,287.042L207.5,584.167L138.417,584.167L138.417,138.458L207.5,138.458L432.667,574.708L657.833,138.458L726.917,138.458L726.917,584.167L657.833,584.167Z" style="fill:white;fill-rule:nonzero;"/>
@@ -84,65 +84,65 @@
         </header>
 
         <!-- Profile Section -->
-        <div class="flex flex-col items-center mb-10 text-center reveal">
+        <div class="flex flex-col items-center mb-8 md:mb-10 text-center reveal">
             <div class="profile-border mb-4">
-                <div class="w-24 h-24 rounded-full bg-dark overflow-hidden border-2 border-black">
-                    <!-- SPAZIO PER IMMAGINE PROFILO: Inserisci il link alla tua foto tra le virgolette qui sotto -->
+                <div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-dark overflow-hidden border-2 border-black">
+                    <!-- SPAZIO PER IMMAGINE PROFILO: Inserisci il link alla tua foto qui -->
                     <img src="https://cdn.statically.io/gh/teomacauda/cdn-assets/main/immagineprofilo.webp" 
                          alt="Teo Macauda" 
                          class="w-full h-full object-cover">
                 </div>
             </div>
-            <h1 class="text-2xl font-extrabold tracking-tight">Teo Macauda</h1>
-            <p class="text-accent text-sm font-semibold tracking-wide">Videomaker & Marketing</p>
-            <p class="text-graytext text-xs mt-3 max-w-[280px] font-light leading-relaxed">
-                Ottimizzo la comunicazione video per far risparmiare tempo ad aziende e creator.
+            <h1 class="text-xl md:text-2xl font-extrabold tracking-tight">Teo Macauda</h1>
+            <p class="text-accent text-xs md:text-sm font-semibold tracking-wide">Videomaker & Marketing</p>
+            <p class="text-graytext text-[11px] md:text-xs mt-3 max-w-[260px] md:max-w-[280px] font-light leading-relaxed">
+                Affianco brand e creator nella loro comunicazione online tramite video!
             </p>
         </div>
 
         <!-- Links Stack -->
-        <div class="w-full space-y-4 reveal">
+        <div class="w-full space-y-3 md:space-y-4 reveal">
             
             <!-- Link: Sito Ufficiale -->
-            <a href="/" class="glass-button w-full p-4 rounded-2xl flex items-center justify-between group">
-                <div class="flex items-center gap-4">
-                    <div class="w-10 h-10 rounded-xl bg-accent/20 flex items-center justify-center text-accent">
-                        <i data-lucide="globe" class="w-5 h-5"></i>
+            <a href="/" class="glass-button w-full p-3 md:p-4 rounded-2xl flex items-center justify-between group">
+                <div class="flex items-center gap-3 md:gap-4">
+                    <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-accent/20 flex items-center justify-center text-accent shrink-0">
+                        <i data-lucide="globe" class="w-4 h-4 md:w-5 md:h-5"></i>
                     </div>
-                    <span class="font-semibold text-white tracking-wide">Guarda il mio sito</span>
+                    <span class="text-sm md:text-base font-semibold text-white tracking-wide">Guarda il mio sito</span>
                 </div>
                 <i data-lucide="arrow-right" class="w-4 h-4 text-graytext group-hover:text-accent group-hover:translate-x-1 transition-all"></i>
             </a>
 
             <!-- Link: WhatsApp -->
-            <a href="https://wa.me/message/KBRZEPY2IJFTA1" target="_blank" class="glass-button w-full p-4 rounded-2xl flex items-center justify-between group">
-                <div class="flex items-center gap-4">
-                    <div class="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center text-green-500">
-                        <i data-lucide="message-circle" class="w-5 h-5"></i>
+            <a href="https://wa.me/message/KBRZEPY2IJFTA1" target="_blank" class="glass-button w-full p-3 md:p-4 rounded-2xl flex items-center justify-between group">
+                <div class="flex items-center gap-3 md:gap-4">
+                    <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-green-500/10 flex items-center justify-center text-green-500 shrink-0">
+                        <i data-lucide="message-circle" class="w-4 h-4 md:w-5 md:h-5"></i>
                     </div>
-                    <span class="font-semibold text-white tracking-wide">Contattami su whatsapp</span>
+                    <span class="text-sm md:text-base font-semibold text-white tracking-wide">Contattami su whatsapp</span>
                 </div>
                 <i data-lucide="arrow-right" class="w-4 h-4 text-graytext group-hover:text-green-500 group-hover:translate-x-1 transition-all"></i>
             </a>
 
             <!-- Link: Email -->
-            <a href="mailto:matteomacaudaprod@gmail.com" class="glass-button w-full p-4 rounded-2xl flex items-center justify-between group">
-                <div class="flex items-center gap-4">
-                    <div class="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-500">
-                        <i data-lucide="mail" class="w-5 h-5"></i>
+            <a href="mailto:matteomacaudaprod@gmail.com" class="glass-button w-full p-3 md:p-4 rounded-2xl flex items-center justify-between group">
+                <div class="flex items-center gap-3 md:gap-4">
+                    <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-500 shrink-0">
+                        <i data-lucide="mail" class="w-4 h-4 md:w-5 md:h-5"></i>
                     </div>
-                    <span class="font-semibold text-white tracking-wide">Inviami un email</span>
+                    <span class="text-sm md:text-base font-semibold text-white tracking-wide">Inviami un email</span>
                 </div>
                 <i data-lucide="arrow-right" class="w-4 h-4 text-graytext group-hover:text-blue-500 group-hover:translate-x-1 transition-all"></i>
             </a>
 
             <!-- Link: Instagram -->
-            <a href="https://instagram.com/teo.macauda" target="_blank" class="glass-button w-full p-4 rounded-2xl flex items-center justify-between group">
-                <div class="flex items-center gap-4">
-                    <div class="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400">
-                        <i data-lucide="instagram" class="w-5 h-5"></i>
+            <a href="https://instagram.com/teo.macauda" target="_blank" class="glass-button w-full p-3 md:p-4 rounded-2xl flex items-center justify-between group">
+                <div class="flex items-center gap-3 md:gap-4">
+                    <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400 shrink-0">
+                        <i data-lucide="instagram" class="w-4 h-4 md:w-5 md:h-5"></i>
                     </div>
-                    <span class="font-semibold text-white tracking-wide">Seguimi su instagram</span>
+                    <span class="text-sm md:text-base font-semibold text-white tracking-wide">Seguimi su instagram</span>
                 </div>
                 <i data-lucide="arrow-right" class="w-4 h-4 text-graytext group-hover:text-purple-400 group-hover:translate-x-1 transition-all"></i>
             </a>
@@ -150,12 +150,16 @@
         </div>
 
         <!-- Footer -->
-        <footer class="mt-24 text-center reveal">
-            <p class="text-[9px] text-white/20 uppercase tracking-[0.4em] font-bold">
-                &copy; <script>document.write(new Date().getFullYear())</script> TEOMACAUDA.IT <br/> 
-                FERRARA • VIDEO STRATEGY
+        <footer class="py-12 text-center border-t border-white/5 relative z-10">
+        <p class="text-graytext text-sm mb-4">
+            &copy; <script>document.write(new Date().getFullYear())</script> Matteo Maria Macauda. P.IVA 02153520891.
+        </p>
+        <div class="px-6">
+            <p class="text-[9px] md:text-[10px] text-white/20 max-w-3xl mx-auto leading-relaxed uppercase tracking-widest">
+                TUTTI I DIRITTI RISERVATI. OGNI CONTENUTO VISIVO, TESTUALE E IL CODICE SORGENTE DI QUESTO SITO SONO DI PROPRIETÀ ESCLUSIVA DELL'AUTORE. NE È VIETATA LA RIPRODUZIONE, LA DISTRIBUZIONE E L'UTILIZZO NON AUTORIZZATO, ANCHE PARZIALE, SENZA ESPLICITO CONSENSO SCRITTO.
             </p>
-        </footer>
+        </div>
+    </footer>
 
     </main>
 
